@@ -1,0 +1,6 @@
+@DDA_Server_HostAddress = http://localhost:5036
+
+GET {{DDA_Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
