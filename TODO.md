@@ -21,7 +21,6 @@ enum Dice : string
     - d12 => random.range(1, 12)
     - d20 => random.range(1,20)
   - GetReading()
-    - W
 
 ## How API will work
 
