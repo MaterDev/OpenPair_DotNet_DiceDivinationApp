@@ -1,21 +1,58 @@
-# MIT License
+Mater Development General Use License (MDGUL)
+Version 1.0
 
 Copyright (c) 2023 ...(key)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Preamble
+
+This license ("MDGUL") applies to the software provided under this license ("Software") and any associated documentation or materials made available by Mater Development ("Licensor"). By using, copying, or distributing the Software, you ("Licensee") agree to be bound by the terms of this License.
+
+2. Grant of License
+
+Subject to the terms of this License, Licensor grants Licensee a non-exclusive, non-transferable, royalty-free license to use the Software for personal or internal business purposes.
+
+3. Restrictions
+
+a. Modification and Derivative Works: Licensee shall not modify, adapt, or create derivative works of the Software.
+
+b. Redistribution: Licensee shall not distribute, sublicense, or transfer the Software to any third party.
+
+c. Commercial Use: Licensee shall not use the Software for commercial purposes, including selling, licensing, or monetizing the Software, without express written permission from Licensor.
+
+4. Attribution and Links
+
+Licensee must include proper attribution to Licensor and links to the original source material of the Software in any use of the Software.
+
+5. Disclaimer of Warranty
+
+The Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement.
+
+6. Limitation of Liability
+
+In no event shall Licensor be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
+
+7. Termination
+
+This License shall automatically terminate if Licensee breaches any of its terms and conditions.
+
+8. General
+
+This License shall be governed by the laws of the jurisdiction in which Licensor is located. Any disputes related to this License shall be subject to the exclusive jurisdiction of the courts in that jurisdiction.
+
+9. Acknowledgement
+
+Licensee acknowledges that they have read this License, understand it, and agree to be bound by its terms and conditions.
+
+---
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Mater Development => Forever...
