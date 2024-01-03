@@ -40,7 +40,7 @@ The Dice Divination App is a web-based server that processes dice roll results s
 ### Running the Application
 
 1. **Start the Server**:
-   - Execute `dotnet run` within the project directory to start the server.
+   - Execute `dotnet run --project DDA_Server` within the project directory to start the server.
 
 2. **Send a POST Request**:
    - Use an API testing tool or your client application to send a POST request with dice roll data to `/dice-divination`.

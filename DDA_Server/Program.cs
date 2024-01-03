@@ -34,5 +34,5 @@ app.MapGet("/getSpread", () =>
 .WithOpenApi();
 
 
-//! Run the server
+//! Run the server, will run on localhost:5036
 app.Run();
