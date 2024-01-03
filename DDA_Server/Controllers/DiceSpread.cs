@@ -5,6 +5,7 @@ class DiceSpread
 {
    public static Dictionary<String, int> RollResults() {
 
+        // Create all dice
         var d2 = new NewDice("d2");
         var d4 = new NewDice("d4");
         var d6 = new NewDice("d6");

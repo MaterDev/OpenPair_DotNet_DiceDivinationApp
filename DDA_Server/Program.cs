@@ -1,7 +1,6 @@
 //! --- 👾 Basic Configurations for app and swagger build ---
 
 using Controllers;
-using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +28,6 @@ app.MapGet("/getSpread", () =>
 {
     // Create 5 forecasts, and for each of them create a new WeatherForecast
     Dictionary<String, int> spread = DiceSpread.RollResults();
-    string jsonSpread = JsonConvert.SerializeObject(spread, Formatting.Indented);
     return spread;
 })
 .WithName("GetSpread")
