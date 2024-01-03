@@ -15,7 +15,7 @@ class NewDice {
     private DiceType Type {get; set;}
 
     public void SetType() {
-        Console.WriteLine($"TypeToUse: {Type}");
+        Console.WriteLine($"TypeToUse: {TypeToUse}");
         Type = TypeToUse switch {
             "d2" => DiceType.D2,
             "d4" => DiceType.D4,
@@ -26,11 +26,11 @@ class NewDice {
             "d20" => DiceType.D20,
             _ => throw new ArgumentException("Invalid Dice Type")
         };
-        Console.WriteLine($"Current type{Type}");
+        Console.WriteLine($"Current Type set to: {Type}");
     }
 
     public int Roll() {
-        Console.WriteLine($"Current type: {Type}");
+        Console.WriteLine($"Current type to Roll: {Type}");
         Random rnd = new Random();
         return Type switch {
             DiceType.D2 => rnd.Next(1, 3),
