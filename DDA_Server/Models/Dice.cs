@@ -11,8 +11,16 @@ public enum DiceType {
 }
 
 class NewDice {
-    public string? TypeToUse {get; set;}
+    public string? TypeToUse {get; private set;}
     private DiceType Type {get; set;}
+    public int RollResult {get; private set;} // Public property to hold the result of a dice
+
+// When new dice is created will automatically set the type and do a roll.
+    public NewDice(string typeToUse) {
+        TypeToUse = typeToUse;
+        SetType();
+        RollResult = Roll();
+    }
 
     public void SetType() {
         Console.WriteLine($"TypeToUse: {TypeToUse}");
