@@ -27,7 +27,7 @@ app.UseHttpsRedirection();
 app.MapGet("/getSpread", () =>
 {
     // Create 5 forecasts, and for each of them create a new WeatherForecast
-    Dictionary<String, int> spread = DiceSpread.RollResults();
+    Dictionary<String, object> spread = DiceSpread.RollResults();
     return spread;
 })
 .WithName("GetSpread")
