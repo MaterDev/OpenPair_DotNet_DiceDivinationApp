@@ -1,6 +1,7 @@
 //! --- 👾 Basic Configurations for app and swagger build ---
 
 using Controllers;
+using Dice.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,28 @@ app.MapGet("/getSpread", () =>
 })
 .WithName("GetSpread")
 .WithOpenApi();
+
+app.MapGet("/interpretDice/{id}", async (int id) =>
+{
+    using (var context = new DiceContext())
+    {
+        Dice.Entities.DiceSpread diceSpread = await context.DiceSpread.FindAsync(id);
+        if (diceSpread == null)
+        {
+            return Results.NotFound("DiceSpread not found.");
+        }
+
+        // Format the dice spread into a request for ChatGPT
+        var chatGptRequest = ChatGPTController.FormatRequestForChatGPT(diceSpread);
+        Console.WriteLine(chatGptRequest);
+        
+        // Send the request to ChatGPT and get the response
+        // var chatGptResponse = await SendRequestToChatGPT(chatGptRequest);
+
+        // return Results.Ok(chatGptResponse);
+        return Results.Ok(diceSpread);
+    }
+});
 
 
 //! Run the server, will run on localhost:5036
