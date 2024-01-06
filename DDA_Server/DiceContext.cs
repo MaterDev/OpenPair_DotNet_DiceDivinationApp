@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Dice.Entities;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
 
 namespace Dice.Context
 {
@@ -12,8 +15,8 @@ namespace Dice.Context
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json")
                .Build();
-            optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+            string connectionString = configuration.GetConnectionString("DefaultConnection") + ";Username=" + Environment.GetEnvironmentVariable("DB_USERNAME");
+            optionsBuilder.UseNpgsql(connectionString);
         }
     }
-
 }

@@ -3,7 +3,7 @@
 ## Define Models
 
 enum Dice : string
-    - d2 = "d2"
+    - d2
     - d4
     - d6
     - d8
@@ -13,13 +13,13 @@ enum Dice : string
 
 - Dice Class:
   - DiceSpread:
-    - d2 => random.range(0,1)
-    - d4 => random.range(1, 4)
-    - d6 => random.range(1, 6)
-    - d8 => random.range(1, 8)
-    - d10-d100 => random.range(0, 9), range(0, 90)
-    - d12 => random.range(1, 12)
-    - d20 => random.range(1,20)
+    - Dice d2 => random.range(0,1)
+    - Dice d4 => random.range(1, 4)
+    - Dice d6 => random.range(1, 6)
+    - Dice d8 => random.range(1, 8)
+    - Dice d10-d100 => random.range(0, 9), range(0, 90)
+    - Dice d12 => random.range(1, 12)
+    - Dice d20 => random.range(1,20)
   - GetReading()
 
 ## How API will work

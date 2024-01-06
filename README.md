@@ -31,6 +31,7 @@
 ### Installation
 
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/MaterDev/OpenPair_DotNet_DiceDivinationApp
    cd OpenPair_DotNet_DiceDivinationApp/DDA_Server
@@ -40,6 +41,7 @@
    - Add your OpenAI API key to the `.env` file.
 
 3. **Restore Dependencies**:
+
    ```bash
    dotnet restore
    ```
@@ -53,14 +55,17 @@ To set up the database for the Dice Divination App:
 
 2. **Run Migrations**:
    - In the terminal, navigate to the project directory and run:
+
      ```bash
      dotnet ef database update
      ```
+
    - This will apply the migrations and set up your database schema.
 
 ### Running the Application
 
 1. **Start the Server**:
+
    ```bash
    dotnet run
    ```
@@ -77,6 +82,7 @@ The Dice Divination App offers several API endpoints for dice roll processing an
    - **Method**: `GET`
    - **Description**: This endpoint responds with a spread of dice roll results, including a date. This spread is also stored in the database upon creation.
    - **Example Response**:
+
      ```json
      {
          "d2": 1,
@@ -94,7 +100,8 @@ The Dice Divination App offers several API endpoints for dice roll processing an
    - **Endpoint**: `/interpretDice/{id}`
    - **Method**: `GET`
    - **Description**: Retrieves a stored divination interpretation by its unique ID and uses ChatGPT to produce a set of interpretations using "JSON mode".
-   - **Example Response**: 
+   - **Example Response**:
+
       ```json
       {
          "overviewInterpretation": "The collective significance of these dice rolls bridges the gap between chance and destiny, weaving a tapestry of numerical symbolism that reflects the intricate balance of dualities, growth, challenges, and potential in life's journey. Each number carries with it a vibration that resonates with ancient wisdom and esoteric knowledge, offering insights into the universal energies at play.",

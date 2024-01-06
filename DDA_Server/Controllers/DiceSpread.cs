@@ -33,24 +33,22 @@ class DiceSpread
 
     private static void WriteResults(Dictionary<String, object> diceRolls)
         {
-            using (var context = new DiceContext())
-            {
-                var diceSpread = new Dice.Entities.DiceSpread
-                {
-                    D2 = (int)diceRolls["d2"],
-                    D4 = (int)diceRolls["d4"],
-                    D6 = (int)diceRolls["d6"],
-                    D8 = (int)diceRolls["d8"],
-                    D10_100 = (int)diceRolls["d10_100"],
-                    D12 = (int)diceRolls["d12"],
-                    D20 = (int)diceRolls["d20"],
-                    Date = DateTime.UtcNow
-                };
+        using var context = new DiceContext();
+        var diceSpread = new Dice.Entities.DiceSpread
+        {
+            D2 = (int)diceRolls["d2"],
+            D4 = (int)diceRolls["d4"],
+            D6 = (int)diceRolls["d6"],
+            D8 = (int)diceRolls["d8"],
+            D10_100 = (int)diceRolls["d10_100"],
+            D12 = (int)diceRolls["d12"],
+            D20 = (int)diceRolls["d20"],
+            Date = DateTime.UtcNow
+        };
 
 
-                context.DiceSpread.Add(diceSpread);
-                context.SaveChanges();
-            }
-        }
+        context.DiceSpread.Add(diceSpread);
+        context.SaveChanges();
+    }
 
 }
