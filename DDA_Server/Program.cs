@@ -32,17 +32,14 @@ app.UseHttpsRedirection();
 
 //! --- 👾 Routes ---
 
-// Define a GET route to return weather
-app.MapGet("/createSpread", () =>
+app.MapPost("/createSpread", () =>
 {
-    // Create 5 forecasts, and for each of them create a new WeatherForecast
     Dictionary<String, object> spread = DiceSpread.RollResults();
-    return spread;
+    return Results.Ok("New spread created successfully!");
 })
 .WithName("CreateSpread")
 .WithOpenApi();
 
-//
 app.MapGet("/interpretDice/{id}", async (int id) =>
 {
     using var context = new DiceContext();
@@ -59,8 +56,8 @@ app.MapGet("/interpretDice/{id}", async (int id) =>
     // Send the request to ChatGPT and get the response
     var chatGptResponse = await ChatGPTController.SendRequestToChatGPT(chatGptRequest);
 
-    // return Results.Ok(chatGptResponse);
     return Results.Ok(chatGptResponse);
+    // return Results.Ok(chatGptResponse);
 })
 .WithName("InterpretDice")
 .WithOpenApi(); ;
@@ -69,7 +66,7 @@ app.MapGet("/interpretDice/{id}", async (int id) =>
 app.MapGet("/getAllDiceRolls", async () =>
 {
     using var context = new DiceContext();
-    var allDiceRolls = await context.DiceSpread.ToListAsync();
+    var allDiceRolls = await context.DiceSpread.OrderByDescending(roll => roll.Date).ToListAsync();
     if (allDiceRolls == null || allDiceRolls.Count == 0)
     {
         return Results.NotFound("No dice rolls found.");

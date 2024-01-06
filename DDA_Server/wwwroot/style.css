@@ -1,3 +1,26 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(105, 122, 132);
+}
+
+header {
+    padding: 20px;
+    color: white;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: white;
+    font-size: 50px;
+    margin: 0;
+}
+
+#allRolls {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
 .dice-roll-card {
     border: 1px solid #ddd;
     border-radius: 8px;

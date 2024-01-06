@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dice Divination App</title>
-    <script src="https://unpkg.com/htmx.org"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Dice Divination App</h1>
-    <div hx-get="/getAllDiceRolls" hx-trigger="load">
+    <header id="pageHeader">
+        <h1>Dice Divination App</h1>
+        <form >
+            <button type="submit" onclick="createSpread()">Create Spread</button>
+        </form>
+    </header>
+    
+    <div hx-get="/getAllDiceRolls" hx-trigger="load" id="allRolls">
         <!-- Dice rolls will be loaded here -->
     </div>
+
+    <script src="https://unpkg.com/htmx.org"></script>
+
+    <script>
+        function createSpread() {
+            fetch('/createSpread', {method: 'POST'})
+        }
+    </script>
 </body>
 </html>
