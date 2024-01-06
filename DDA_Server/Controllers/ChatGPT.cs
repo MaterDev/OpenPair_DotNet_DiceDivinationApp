@@ -28,7 +28,6 @@ class ChatGPTController
         return prompt;
     }
 
-
     public static async Task<ChatGPTResponse> SendRequestToChatGPT(string request)
 {
     var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
@@ -45,7 +44,7 @@ class ChatGPTController
             Messages = new ChatMessage[] { new ChatMessage(ChatMessageRole.User, request) }
         });
 
-        var responseContent = chatGptResponse.Choices.FirstOrDefault()?.Message?.Content;
+        var responseContent = chatGptResponse.Choices.FirstOrDefault()?.Message?.TextContent;
         if (!string.IsNullOrEmpty(responseContent))
         {
             var responseObj = JsonConvert.DeserializeObject<ChatGPTResponse>(responseContent);
