@@ -3,6 +3,7 @@
 using Controllers;
 using Dice.Context;
 using dotenv.net;
+using Microsoft.EntityFrameworkCore;
 DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +54,24 @@ app.MapGet("/interpretDice/{id}", async (int id) =>
 
     // return Results.Ok(chatGptResponse);
     return Results.Ok(chatGptResponse);
-});
+})
+.WithName("InterpretDice")
+.WithOpenApi();;
+
+// Define a GET route to retrieve all dice rolls
+app.MapGet("/getAllDiceRolls", async () =>
+{
+    using var context = new DiceContext();
+    var allDiceRolls = await context.DiceSpread.ToListAsync();
+    if (allDiceRolls == null || allDiceRolls.Count == 0)
+    {
+        return Results.NotFound("No dice rolls found.");
+    }
+    
+    return Results.Ok(allDiceRolls);
+})
+.WithName("GetAllDiceRolls")
+.WithOpenApi();
 
 //! Run the server, will run on localhost:5036
 app.Run();
