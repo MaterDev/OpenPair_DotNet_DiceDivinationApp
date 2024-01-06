@@ -1,37 +1,36 @@
-//! --- 👾 Basic Configurations for app and swagger build ---
-
+// Basic Configurations and Imports
 using System.Text;
 using Controllers;
 using Dice.Context;
 using dotenv.net;
 using Microsoft.EntityFrameworkCore;
-DotEnv.Load();
-var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Load Environment Variables
+DotEnv.Load();
+
+// Configure WebApplication Builder
+var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Setup App Configuration
+// Build WebApplication
 var app = builder.Build();
 
-// Setup serving static files from wwwroot
+// Setup Static Files and Default Files
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Configure the HTTP request pipeline.
+// Configure Swagger for Development Environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Enable HTTPS Redirection
 app.UseHttpsRedirection();
 
-
-//! --- 👾 Routes ---
-
+// Route for Creating a New Dice Spread
 app.MapPost("/createSpread", () =>
 {
     Dictionary<String, object> spread = DiceSpread.RollResults();
@@ -40,33 +39,31 @@ app.MapPost("/createSpread", () =>
 .WithName("CreateSpread")
 .WithOpenApi();
 
+// Route for Interpreting a Specific Dice Spread
 app.MapGet("/interpretDice/{id}", async (int id) =>
 {
     using var context = new DiceContext();
-    Dice.Entities.DiceSpread? diceSpread = await context.DiceSpread.FindAsync(id);
+    var diceSpread = await context.DiceSpread.FindAsync(id);
+
     if (diceSpread == null)
     {
         return Results.NotFound("DiceSpread not found.");
     }
 
-    // Format the dice spread into a request for ChatGPT
     var chatGptRequest = ChatGPTController.FormatRequestForChatGPT(diceSpread);
-    Console.WriteLine(chatGptRequest);
-
-    // Send the request to ChatGPT and get the response
     var chatGptResponse = await ChatGPTController.SendRequestToChatGPT(chatGptRequest);
 
     return Results.Ok(chatGptResponse);
-    // return Results.Ok(chatGptResponse);
 })
 .WithName("InterpretDice")
-.WithOpenApi(); ;
+.WithOpenApi();
 
-// Define a GET route to retrieve all dice rolls, returns htmx for the DOM
+// Route for Getting All Dice Rolls in HTML Format
 app.MapGet("/getAllDiceRolls", async () =>
 {
     using var context = new DiceContext();
     var allDiceRolls = await context.DiceSpread.OrderByDescending(roll => roll.Date).ToListAsync();
+
     if (allDiceRolls == null || allDiceRolls.Count == 0)
     {
         return Results.NotFound("No dice rolls found.");
@@ -75,20 +72,21 @@ app.MapGet("/getAllDiceRolls", async () =>
     var stringBuilder = new StringBuilder();
     foreach (var roll in allDiceRolls)
     {
-        stringBuilder.AppendLine("<div class='dice-roll-card'>");
-        stringBuilder.AppendLine("<h2>" + roll.Date.ToString("dd-MM-yyyy HH:mm") + "</h2>");
-        stringBuilder.AppendLine("<span> ID: " + roll.Id + "</span>");
-
+        stringBuilder.AppendLine($"<div class='dice-roll-card'>");
+        stringBuilder.AppendLine($"<h2>{roll.Date:dd-MM-yyyy HH:mm}</h2>");
+        stringBuilder.AppendLine($"<span> ID: {roll.Id}</span>");
         stringBuilder.AppendLine("<hr>");
-
         stringBuilder.AppendLine("<table>");
-        stringBuilder.AppendLine("<tr><th>D2</th><td>" + roll.D2 + "</td></tr>");
-        stringBuilder.AppendLine("<tr><th>D4</th><td>" + roll.D4 + "</td></tr>");
-        stringBuilder.AppendLine("<tr><th>D6</th><td>" + roll.D6 + "</td></tr>");
-        stringBuilder.AppendLine("<tr><th>D8</th><td>" + roll.D8 + "</td></tr>");
-        stringBuilder.AppendLine("<tr><th>D12</th><td>" + roll.D12 + "</td></tr>");
-        stringBuilder.AppendLine("<tr><th>D20</th><td>" + roll.D20 + "</td></tr>");
-        stringBuilder.AppendLine("<tr><th>D100</th><td>" + roll.D10_100 + "</td></tr>");
+
+        // Add table rows for each dice roll
+        stringBuilder.AppendLine($"<tr><th>D2</th><td>{roll.D2}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D4</th><td>{roll.D4}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D6</th><td>{roll.D6}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D8</th><td>{roll.D8}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D12</th><td>{roll.D12}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D20</th><td>{roll.D20}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D100</th><td>{roll.D10_100}</td></tr>");
+
         stringBuilder.AppendLine("</table>");
         stringBuilder.AppendLine("</div>");
     }
@@ -98,5 +96,5 @@ app.MapGet("/getAllDiceRolls", async () =>
 .WithName("GetAllDiceRolls")
 .WithOpenApi();
 
-//! Run the server, will run on localhost:5036
+// Run the Server (Default: localhost:5036)
 app.Run();
