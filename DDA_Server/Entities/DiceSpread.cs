@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ChatGPT;
 
 namespace Dice.Entities
 {
@@ -16,6 +17,8 @@ namespace Dice.Entities
         public int D10_100 { get; set; }
         public int D12 { get; set; }
         public int D20 { get; set; }
+
+        public ChatGPTResponse? interpretation { get; set; }
 
         public DateTime Date { get; set; }
     }

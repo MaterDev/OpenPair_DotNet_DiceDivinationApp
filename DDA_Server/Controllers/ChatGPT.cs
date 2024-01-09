@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using OpenAI_API;
 using OpenAI_API.Chat;
 using OpenAI_API.Models;
+using ChatGPT;
 
 namespace Controllers;
 class ChatGPTController
@@ -29,50 +30,34 @@ class ChatGPTController
     }
 
     public static async Task<ChatGPTResponse> SendRequestToChatGPT(string request)
-{
-    var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
-    var client = new OpenAIAPI(apiKey);
-
-    try
     {
-        var chatGptResponse = await client.Chat.CreateChatCompletionAsync(new ChatRequest()
-        {
-            Model = Model.GPT4_Turbo,
-            Temperature = 0.1,
-            MaxTokens = 1000,
-            ResponseFormat = ChatRequest.ResponseFormats.JsonObject,
-            Messages = new ChatMessage[] { new ChatMessage(ChatMessageRole.User, request) }
-        });
+        var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+        var client = new OpenAIAPI(apiKey);
 
-        var responseContent = chatGptResponse.Choices.FirstOrDefault()?.Message?.TextContent;
-        if (!string.IsNullOrEmpty(responseContent))
+        try
         {
-            var responseObj = JsonConvert.DeserializeObject<ChatGPTResponse>(responseContent);
-            return responseObj ?? new ChatGPTResponse();
+            var chatGptResponse = await client.Chat.CreateChatCompletionAsync(new ChatRequest()
+            {
+                Model = Model.GPT4_Turbo,
+                Temperature = 0.1,
+                MaxTokens = 1000,
+                ResponseFormat = ChatRequest.ResponseFormats.JsonObject,
+                Messages = new ChatMessage[] { new ChatMessage(ChatMessageRole.User, request) }
+            });
+
+            var responseContent = chatGptResponse.Choices.FirstOrDefault()?.Message?.TextContent;
+            if (!string.IsNullOrEmpty(responseContent))
+            {
+                var responseObj = JsonConvert.DeserializeObject<ChatGPTResponse>(responseContent);
+                return responseObj ?? new ChatGPTResponse();
+            }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+
+        return new ChatGPTResponse(); // Return an empty response object if no response or in case of an error
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"An error occurred: {ex.Message}");
-    }
 
-    return new ChatGPTResponse(); // Return an empty response object if no response or in case of an error
-}
-
-
-
-}
-
-internal class ChatGPTResponse
-{
-    [JsonProperty("overview_interpretation")]
-    public string? OverviewInterpretation { get; set; }
-
-    [JsonProperty("dice_interpretations")]
-    public Dictionary<string, string> DiceInterpretations { get; set; }
-
-    public ChatGPTResponse()
-    {
-        DiceInterpretations = new Dictionary<string, string>();
-    }
 }

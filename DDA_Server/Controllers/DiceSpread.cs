@@ -1,5 +1,6 @@
 using Dice;
 using Dice.Context;
+using Newtonsoft.Json;
 
 namespace Controllers;
 class DiceSpread
@@ -31,8 +32,9 @@ class DiceSpread
         return diceRolls;
     }
 
-    private static void WriteResults(Dictionary<String, object> diceRolls)
+    private static async void WriteResults(Dictionary<String, object> diceRolls)
         {
+
         using var context = new DiceContext();
         var diceSpread = new Dice.Entities.DiceSpread
         {
@@ -43,9 +45,15 @@ class DiceSpread
             D10_100 = (int)diceRolls["d10_100"],
             D12 = (int)diceRolls["d12"],
             D20 = (int)diceRolls["d20"],
-            Date = DateTime.UtcNow
+            Date = DateTime.UtcNow,
         };
 
+        var chatGptRequest = ChatGPTController.FormatRequestForChatGPT(diceSpread);
+        var chatGptResponse = await ChatGPTController.SendRequestToChatGPT(chatGptRequest);
+
+        diceSpread.interpretation = chatGptResponse;
+
+        Console.WriteLine($"ChatGPT response: {diceSpread}");
 
         context.DiceSpread.Add(diceSpread);
         context.SaveChanges();
