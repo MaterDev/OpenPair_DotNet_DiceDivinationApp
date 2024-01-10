@@ -31,9 +31,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Route for Creating a New Dice Spread
-app.MapPost("/createSpread", () =>
+app.MapPost("/createSpread", async (HttpContext context) =>
 {
-    Dictionary<String, object> spread = DiceSpread.RollResults();
+    Dictionary<String, object> spread = await DiceSpread.RollResults();
     return Results.Ok("New spread created successfully!");
 })
 .WithName("CreateSpread")
@@ -58,8 +58,23 @@ app.MapGet("/interpretDice/{id}", async (int id) =>
 .WithName("InterpretDice")
 .WithOpenApi();
 
-// Route for Getting All Dice Rolls in HTML Format
+// Define a GET route to retrieve all dice rolls
 app.MapGet("/getAllDiceRolls", async () =>
+{
+    using var context = new DiceContext();
+    var allDiceRolls = await context.DiceSpread.ToListAsync();
+    if (allDiceRolls == null || allDiceRolls.Count == 0)
+    {
+        return Results.NotFound("No dice rolls found.");
+    }
+    
+    return Results.Ok(allDiceRolls);
+})
+.WithName("GetAllDiceRolls")
+.WithOpenApi();
+
+// Route for Getting All Dice Rolls in HTML Format
+app.MapGet("/getAllDiceRollsDOM", async () =>
 {
     using var context = new DiceContext();
     var allDiceRolls = await context.DiceSpread.OrderByDescending(roll => roll.Date).ToListAsync();
@@ -93,7 +108,7 @@ app.MapGet("/getAllDiceRolls", async () =>
 
     return Results.Content(stringBuilder.ToString(), "text/html");
 })
-.WithName("GetAllDiceRolls")
+.WithName("GetAllDiceRollsDOM")
 .WithOpenApi();
 
 // Run the Server (Default: localhost:5036)

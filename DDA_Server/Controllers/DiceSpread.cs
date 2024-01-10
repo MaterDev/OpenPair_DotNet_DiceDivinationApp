@@ -3,9 +3,9 @@ using Dice.Context;
 using Newtonsoft.Json;
 
 namespace Controllers;
-class DiceSpread
+public class DiceSpread
 {
-   public static Dictionary<String, object> RollResults() {
+   public static async Task<Dictionary<String, object>> RollResults() {
 
         // Create all dice
         var d2 = new NewDice("d2");
@@ -28,11 +28,11 @@ class DiceSpread
             {"date", DateTime.UtcNow}
         };
 
-        WriteResults(diceRolls);
+        await WriteResults(diceRolls);
         return diceRolls;
     }
 
-    private static async void WriteResults(Dictionary<String, object> diceRolls)
+    private static async Task WriteResults(Dictionary<String, object> diceRolls)
         {
 
         using var context = new DiceContext();
@@ -50,10 +50,11 @@ class DiceSpread
 
         var chatGptRequest = ChatGPTController.FormatRequestForChatGPT(diceSpread);
         var chatGptResponse = await ChatGPTController.SendRequestToChatGPT(chatGptRequest);
+        string chatGptResponseJson = JsonConvert.SerializeObject(chatGptResponse);
 
-        diceSpread.interpretation = chatGptResponse;
+        diceSpread.Interpretation = chatGptResponseJson;
 
-        Console.WriteLine($"ChatGPT response: {diceSpread}");
+        Console.WriteLine($"ChatGPT response: {chatGptResponse}");
 
         context.DiceSpread.Add(diceSpread);
         context.SaveChanges();

@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 public class ChatGPTResponse
 {
-    [Key]
-    public int Id { get; set; }
-    
     [JsonProperty("overview_interpretation")]
     public string? OverviewInterpretation { get; set; }
 

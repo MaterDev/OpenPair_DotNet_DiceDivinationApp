@@ -18,7 +18,7 @@ namespace Dice.Entities
         public int D12 { get; set; }
         public int D20 { get; set; }
 
-        public ChatGPTResponse? interpretation { get; set; }
+        public string? Interpretation { get; set; }
 
         public DateTime Date { get; set; }
     }
