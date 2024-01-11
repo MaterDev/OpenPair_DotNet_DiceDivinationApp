@@ -27,7 +27,7 @@
         event.preventDefault();
 
         // Display a loader
-        document.getElementById('pageHcreateBtnContainereader').innerHTML += '<div id="loader">Creating Spread... (Please Wait)</div>';
+        document.getElementById('pageHeader').innerHTML += '<div id="loader">Creating Spread... (Please Wait)</div>';
 
         fetch('/createSpread', {method: 'POST'})
             .then(response => {
