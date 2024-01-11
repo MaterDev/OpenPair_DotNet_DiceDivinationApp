@@ -18,23 +18,21 @@ class ChatGPTController
 
             Please provide the interpretation in a JSON format with the following structure:
 
-            - An 'overview_interpretation' key with a string value offering an overall guidance message. This should synthesize the collective meanings of the dice rolls, highlighting patterns, key areas to pay attention to, and unique attributes of the spread. It should provide an overarching summary relevant to my current life situation.
+            - An 'overview_interpretation' key with a string value offering an overall guidance message. This should synthesize the collective meanings of the dice rolls, highlighting patterns and interesting mathematical relationships that may yeild some conceptual basis for symbolic interpretation, key areas to pay attention to. It should provide an overarching summary relevant to my current life situation.
 
             - A 'dice_interpretations' key that is a dictionary. Each key should be the name of a dice ('d2', 'd4', 'd6', 'd8', 'd10_100', 'd12', 'd20'), with each value being a string that offers specific guidance. The interpretation for each dice should reflect its thematic association: 
-                - 'd2' for fundamental choices or binary decisions,
-                - 'd4' for stability or foundations,
-                - 'd6' for balance and harmony in daily life,
-                - 'd8' for material and financial aspects,
-                - 'd10_100' for destiny and life's bigger picture,
-                - 'd12' for completeness and spiritual wisdom,
-                - 'd20' for unexpected challenges and opportunities.
+                - 'd2': for fundamental choices or binary decisions. A '1' may indicate that the overall reading is dominated by considerations that are of a spiritual nature, while a '2' may indicate that the overall reading is dominated by considerations that are of a material nature (As above, so below.)
+                - 'd4': for stability or foundations. A '1' may indicate weak foundations, while a '4' may indicate strong foundations. Foundations are are the underlying basis for the current situation, and may be physical, emotional, mental, or spiritual things which are necessary for the current situation to exist/change/evolve.
+                - 'd6': represents the key facets of one's path. The path is a set of tools for how one navigates their purpose/callin in the world.: '1' for the conjuration and manifestation as spiritual processes, '2' for the relationships and integrity, '3' for the warrior spirit and willpower, '4' for the the attainment of knowledge and wisdom, '5' for ego/instinct/primal-nature, and '6' for the higher-self and the connection to the Daimon. The interpretation should reflect the current state of each facet that corresponds to the result, and how it relates to the overall situation and advice.
+                - 'd8': for state of consciousness which should be cultivated. '1' is the 'connected' state, '2' is the 'excited' state, '3' is the 'clear' state, '4' is the 'balanced' state, '5' is the 'formative' state, '6' is the 'focused' state, '7' is the 'introspective' state, '8' is the 'secure state' state. The interpretation should reflect the current state the result, and how it relates to the overall situation and advice.
+                - 'd10_100': for destiny and life's bigger picture. The larger the number the more significant impact the reading will have for the immediate future. The lower the number the more significant impact the reading will have for the long-term future. The interpretation should reflect the result, and how it relates to the overall situation and advice.
+                - 'd12': relates to the 12 Archetypes of Jungian psychology. This is psychological dice. '1' represents 'The Ruler', '2' represents 'The Creator', '3' represents 'The Sage', '4' represents 'The Innocent', '5' represents 'The Explorer', '6' represents 'The Rebel', '7' represents 'The Hero', '8' represents 'The Wizard', '9' represents 'The Jester', '10' represents 'The Everyman', '11' represents 'The Lover', '12' represents 'The Caregiver'. The archetype of the result should provide some quote, in the voice of the archtype, which is easy to remember and contemplate throughout the day. The interpretation should reflect the corresponding, and how it relates to the overall situation and advice. 
+                - 'd20': is the difficult level of the over all reading. A lower number indicates relative difficulty in applying the advice, while a higher number indicates relative ease in applying the advice. The interpretation should reflect the result, and how it relates to the overall situation and advice. The goal of the D20 is to provide some forsight as to exactly what will be the most difficult, in the context of the overall reading. Assess this by considering the other dice rolls, and how they relate to the overall situation and advice.
 
             Each interpretation should provide actionable advice, insights, or warnings, addressing the respective thematic area, and tailored to personal growth, relationships, career, or spiritual matters, in line with numerology and gamatria principles.
 
-            For example, the value for 'd2' should interpret the significance of the D2 roll, providing guidance for decision-making or pivotal life choices, based on its numerology and gamatria implications. Similarly, interpret the other dice rolls to offer focused, thematic guidance."";
+            For example, the interpretation for 'd2' should provide direct guidance related to fundamental choices or binary decisions, reflecting its numerological and gamatria significance, without stating 'A roll of x on D2 indicates...'. The same approach should be followed for the other dice rolls, focusing on the thematic message rather than the mechanics of the dice."";
         ";
-
-        // Console.WriteLine($"Prompt: {prompt}");
 
         return prompt;
     }
