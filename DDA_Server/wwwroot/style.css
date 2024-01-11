@@ -1,44 +1,123 @@
+/* CSS Variables for Consistent Theming */
+:root {
+    --primary-bg-color: #f0f0f0; /* Light gray background */
+    --secondary-bg-color: #e0e0e0; /* Slightly darker gray for contrast */
+    --primary-text-color: #333; /* Dark gray for text */
+    --secondary-text-color: #555; /* Lighter gray for secondary text */
+    --accent-color: #606060; /* Neutral accent color */
+    --button-bg-color: #a0a0a0; /* Neutral button background */
+    --button-hover-bg-color: #888; /* Darker shade for hover state */
+    --border-color: #ccc; /* Light gray border */
+}
+
+/* Base styles */
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(105, 122, 132);
+    font-family: 'Georgia', serif;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    margin: 0;
+    padding: 0;
 }
 
 header {
-    padding: 20px;
-    color: white;
-    max-width: 1000px;
-    margin: 0 auto;
+    padding: 5px;
+    background-color: var(--accent-color);
+    color: var(--secondary-bg-color);
+    text-align: center;
 }
 
 h1 {
-    color: white;
-    font-size: 50px;
-    margin: 0;
+    font-family: 'Times New Roman', serif;
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+/* Title with responsive font size */
+#title {
+    color: var(--primary-text-color);
+    font-size: clamp(2rem, 8vw, 5rem);
+    text-align: center;
+    margin: 5px;
+}
+
+/* Container styles */
+#createBtnContainer, #allRolls {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#createBtnContainer {
+    padding-bottom: 0;
 }
 
 #allRolls {
-    margin: 0 auto;
+    flex-wrap: wrap;
     max-width: 1000px;
+    margin: auto;
 }
 
+/* Card styles */
 .dice-roll-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
+    background-color: var(--secondary-bg-color);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     margin: 10px;
-    background-color: #f9f9f9;
-    max-width: 200px;
-    display: inline-block;
+    padding: 20px;
+    width: calc(50% - 20px);
+    box-sizing: border-box;
 }
+
 .dice-roll-card table {
     width: 100%;
     border-collapse: collapse;
 }
+
 .dice-roll-card th, .dice-roll-card td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 8px;
     text-align: left;
 }
-.dice-roll-card th {
-    background-color: #f2f2f2;
+
+/* Table styles with subtle shadow */
+#resultTable {
+    background-color: var(--secondary-bg-color);
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Times New Roman', serif;
+    margin: 20px 0;
+    box-shadow: 0 0 10px 3px rgba(0,0,0,0.1);
+}
+
+/* Button styles with transition effects */
+#createSpreadBtn {
+    background-color: var(--button-bg-color);
+    border: 2px solid var(--button-bg-color);
+    border-radius: 5px;
+    color: var(--primary-bg-color);
+    cursor: pointer;
+    font-size: clamp(15px, 4vw, 25px);
+    margin: auto;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#createSpreadBtn:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+/* Animation and media query */
+@keyframes blink {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0;}
+}
+
+#loader {
+    animation: blink 1s linear infinite;
+}
+
+@media (max-width: 750px) {
+    .dice-roll-card {
+        width: 100%;
+    }
 }

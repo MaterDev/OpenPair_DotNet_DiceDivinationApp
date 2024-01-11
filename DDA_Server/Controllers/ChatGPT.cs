@@ -10,7 +10,7 @@ class ChatGPTController
 
     public static string FormatRequestForChatGPT(Dice.Entities.DiceSpread diceSpread)
     {
-        string prompt = @"
+        string prompt = $@"
             ""I rolled a series of dice and obtained the following results: 
             D2: {diceSpread.D2}, D4: {diceSpread.D4}, D6: {diceSpread.D6}, 
             D8: {diceSpread.D8}, D10_100: {diceSpread.D10_100}, D12: {diceSpread.D12}, 
@@ -25,6 +25,8 @@ class ChatGPTController
 
             For example, the value for 'd2' should interpret the significance of the D2 roll in the context of numerology and gamatria, and similarly for the other dice."";
         ";
+
+        // Console.WriteLine($"Prompt: {prompt}");
 
         return prompt;
     }

@@ -8,11 +8,12 @@
 </head>
 <body>
     <header id="pageHeader">
-        <h1>Dice Divination App</h1>
-        <form >
-            <button type="submit" onclick="createSpread()">Create Spread</button>
-        </form>
+        <h1 id="title">Dice Divination App</h1>
+        
     </header>
+    <form id="createBtnContainer" >
+        <button id="createSpreadBtn" type="submit" onclick="createSpread(event)">🎲 Create Spread 🎲</button>
+    </form>
     
     <div hx-get="/getAllDiceRollsDOM" hx-trigger="load" id="allRolls">
         <!-- Dice rolls will be loaded here -->
@@ -21,9 +22,25 @@
     <script src="https://unpkg.com/htmx.org"></script>
 
     <script>
-        function createSpread() {
-            fetch('/createSpread', {method: 'POST'})
-        }
+        function createSpread(event) {
+        // Prevent form submission from refreshing the page
+        event.preventDefault();
+
+        // Display a loader
+        document.getElementById('pageHeader').innerHTML += '<div id="loader">Creating Spread... (Please Wait)</div>';
+
+        fetch('/createSpread', {method: 'POST'})
+            .then(response => {
+                // Once the request is complete, remove the loader and refresh the page
+                document.getElementById('loader').remove();
+                location.reload();
+            })
+            .catch(error => {
+                // If there's an error, remove the loader and display the error
+                document.getElementById('loader').remove();
+                console.error('Error:', error);
+            });
+    }
     </script>
 </body>
 </html>

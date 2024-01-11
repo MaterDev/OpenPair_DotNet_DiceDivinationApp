@@ -1,9 +1,12 @@
 // Basic Configurations and Imports
 using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks.Dataflow;
 using Controllers;
 using Dice.Context;
 using dotenv.net;
 using Microsoft.EntityFrameworkCore;
+using ChatGPT;
 
 // Load Environment Variables
 DotEnv.Load();
@@ -67,7 +70,7 @@ app.MapGet("/getAllDiceRolls", async () =>
     {
         return Results.NotFound("No dice rolls found.");
     }
-    
+
     return Results.Ok(allDiceRolls);
 })
 .WithName("GetAllDiceRolls")
@@ -87,21 +90,39 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
     var stringBuilder = new StringBuilder();
     foreach (var roll in allDiceRolls)
     {
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true, // This will make the deserialization case-insensitive.
+        };
+
+        Interpretation? interpretation = null;
+
+        if (!string.IsNullOrEmpty(roll.Interpretation))
+        {
+            interpretation = JsonSerializer.Deserialize<Interpretation>(roll.Interpretation, options);
+        }
+
         stringBuilder.AppendLine($"<div class='dice-roll-card'>");
-        stringBuilder.AppendLine($"<h2>{roll.Date:dd-MM-yyyy HH:mm}</h2>");
-        stringBuilder.AppendLine($"<span> ID: {roll.Id}</span>");
+        stringBuilder.AppendLine($"<h2>{roll.Date.ToString("MMMM d, yyyy - h:mmtt")}</h2>");
+        stringBuilder.AppendLine($"<span><b>ID: {roll.Id}</b></span>");
         stringBuilder.AppendLine("<hr>");
-        stringBuilder.AppendLine("<table>");
+        stringBuilder.AppendLine("<div id='overview'>");
+        stringBuilder.AppendLine("<h3>Overview</h3>");
+        stringBuilder.AppendLine($"<p>{interpretation?.Overview_interpretation}</p>");
+        stringBuilder.AppendLine("</div>");
 
+        stringBuilder.AppendLine("<table id='resultTable'>");
         // Add table rows for each dice roll
-        stringBuilder.AppendLine($"<tr><th>D2</th><td>{roll.D2}</td></tr>");
-        stringBuilder.AppendLine($"<tr><th>D4</th><td>{roll.D4}</td></tr>");
-        stringBuilder.AppendLine($"<tr><th>D6</th><td>{roll.D6}</td></tr>");
-        stringBuilder.AppendLine($"<tr><th>D8</th><td>{roll.D8}</td></tr>");
-        stringBuilder.AppendLine($"<tr><th>D12</th><td>{roll.D12}</td></tr>");
-        stringBuilder.AppendLine($"<tr><th>D20</th><td>{roll.D20}</td></tr>");
-        stringBuilder.AppendLine($"<tr><th>D100</th><td>{roll.D10_100}</td></tr>");
-
+        stringBuilder.AppendLine("<tr><th>Dice</th><th>Result</th><th>Interpretation</th></tr>");
+        
+        stringBuilder.AppendLine($"<tr><th>D2</th><td>{roll.D2}</td><td>{interpretation?.Dice_interpretations["d2"]}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D4</th><td>{roll.D4}</td><td>{interpretation?.Dice_interpretations["d4"]}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D6</th><td>{roll.D6}</td><td>{interpretation?.Dice_interpretations["d6"]}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D8</th><td>{roll.D8}</td><td>{interpretation?.Dice_interpretations["d8"]}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D12</th><td>{roll.D12}</td><td>{interpretation?.Dice_interpretations["d12"]}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D20</th><td>{roll.D20}</td><td>{interpretation?.Dice_interpretations["d20"]}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D100</th><td>{roll.D10_100}</td><td>{interpretation?.Dice_interpretations["d10_100"]}</td></tr>");
         stringBuilder.AppendLine("</table>");
         stringBuilder.AppendLine("</div>");
     }
