@@ -122,7 +122,7 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
         stringBuilder.AppendLine($"<tr><th>D8</th><td>{roll.D8}</td><td>{interpretation?.Dice_interpretations["d8"]}</td></tr>");
         stringBuilder.AppendLine($"<tr><th>D12</th><td>{roll.D12}</td><td>{interpretation?.Dice_interpretations["d12"]}</td></tr>");
         stringBuilder.AppendLine($"<tr><th>D20</th><td>{roll.D20}</td><td>{interpretation?.Dice_interpretations["d20"]}</td></tr>");
-        stringBuilder.AppendLine($"<tr><th>D100</th><td>{roll.D10_100}</td><td>{interpretation?.Dice_interpretations["d10_100"]}</td></tr>");
+        stringBuilder.AppendLine($"<tr><th>D10_100</th><td>{roll.D10_100}</td><td>{interpretation?.Dice_interpretations["d10_100"]}</td></tr>");
         stringBuilder.AppendLine("</table>");
         stringBuilder.AppendLine("</div>");
     }
