@@ -9,11 +9,11 @@
 <body>
     <header id="pageHeader">
         <h1 id="title">Dice Divination App</h1>
-        
+        <form id="createBtnContainer" >
+            <button id="createSpreadBtn" type="submit" onclick="createSpread(event)">🎲 Create Spread 🎲</button>
+        </form>
     </header>
-    <form id="createBtnContainer" >
-        <button id="createSpreadBtn" type="submit" onclick="createSpread(event)">🎲 Create Spread 🎲</button>
-    </form>
+    
     
     <div hx-get="/getAllDiceRollsDOM" hx-trigger="load" id="allRolls">
         <!-- Dice rolls will be loaded here -->
@@ -27,7 +27,7 @@
         event.preventDefault();
 
         // Display a loader
-        document.getElementById('pageHeader').innerHTML += '<div id="loader">Creating Spread... (Please Wait)</div>';
+        document.getElementById('pageHcreateBtnContainereader').innerHTML += '<div id="loader">Creating Spread... (Please Wait)</div>';
 
         fetch('/createSpread', {method: 'POST'})
             .then(response => {
