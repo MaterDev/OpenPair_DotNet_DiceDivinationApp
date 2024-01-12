@@ -17,7 +17,6 @@
 |--------------|--------------|
 | ![Screenshot1](./images/Screenshot_1.png) | ![Screenshot2](./images/Screenshot_2.png) |
 
-
 ## Getting Started
 
 ### Prerequisites
