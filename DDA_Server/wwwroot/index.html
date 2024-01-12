@@ -1,46 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dice Divination App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header id="pageHeader">
-        <h1 id="title">Dice Divination App</h1>
-        <form id="createBtnContainer" >
-            <button id="createSpreadBtn" type="submit" onclick="createSpread(event)">🎲 Create Spread 🎲</button>
-        </form>
+      <h1 id="title">Dice Divination App</h1>
+      <form id="createBtnContainer">
+        <button
+          id="createSpreadBtn"
+          type="submit"
+          onclick="createSpread(event)"
+        >
+          🎲 Create Spread 🎲
+        </button>
+      </form>
     </header>
-    
-    
+
     <div hx-get="/getAllDiceRollsDOM" hx-trigger="load" id="allRolls">
-        <!-- Dice rolls will be loaded here -->
+      <!-- Dice rolls will be loaded here -->
     </div>
 
     <script src="https://unpkg.com/htmx.org"></script>
 
     <script>
-        function createSpread(event) {
+      function createSpread(event) {
         // Prevent form submission from refreshing the page
         event.preventDefault();
 
         // Display a loader
-        document.getElementById('pageHeader').innerHTML += '<div id="loader">Creating Spread... (Please Wait)</div>';
+        document.getElementById("pageHeader").innerHTML +=
+          '<div id="loader">Creating... (Please Meditate)</div>';
 
-        fetch('/createSpread', {method: 'POST'})
-            .then(response => {
-                // Once the request is complete, remove the loader and refresh the page
-                document.getElementById('loader').remove();
-                location.reload();
-            })
-            .catch(error => {
-                // If there's an error, remove the loader and display the error
-                document.getElementById('loader').remove();
-                console.error('Error:', error);
-            });
-    }
+        // Loading audio for while the request is being made
+        var loadingAudio = new Audio(
+          "/assets/uplifting-pad-texture-113842.mp3"
+        );
+        loadingAudio.play();
+
+        // Done audio for when the request is complete
+        var doneAudio = new Audio("/assets/hotel-bell-ding-1-174457.mp3");
+
+        fetch("/createSpread", { method: "POST" })
+          .then((response) => {
+            // Once the request is complete, remove the loader, stop the audio, and refresh the page
+            document.getElementById("loader").remove();
+            loadingAudio.pause();
+            loadingAudio.currentTime = 0;
+            doneAudio.play();
+            // Reload the page after the done audio has finished
+            doneAudio.onended = function () {
+              console.log("done");
+              location.reload();
+            };
+          })
+          .catch((error) => {
+            // If there's an error, remove the loader, stop the audio, and display the error
+            document.getElementById("loader").remove();
+            audio.pause();
+            audio.currentTime = 0;
+            console.error("Error:", error);
+          });
+      }
     </script>
-</body>
+  </body>
 </html>

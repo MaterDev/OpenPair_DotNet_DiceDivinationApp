@@ -114,6 +114,7 @@ h1 {
 
 #loader {
     animation: blink 1s linear infinite;
+    margin: 10px;
 }
 
 @media (max-width: 750px) {
