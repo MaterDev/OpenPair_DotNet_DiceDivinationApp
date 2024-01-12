@@ -8,8 +8,9 @@
   </head>
   <body>
     <header id="pageHeader">
-      <span id="title">
+      <div id="title">
         The Path
+        </div>
         <button
           id="createSpreadBtn"
           type="submit"
@@ -17,7 +18,6 @@
         >
           🎲
         </button>
-    </span>
     </header>
 
     <div hx-get="/getAllDiceRollsDOM" hx-trigger="load" id="allRolls">
