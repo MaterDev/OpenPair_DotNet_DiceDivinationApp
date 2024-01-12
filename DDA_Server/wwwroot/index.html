@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dice Divination App</title>
+    <title>The Path</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header id="pageHeader">
-      <h1 id="title">Dice Divination App</h1>
-      <form id="createBtnContainer">
+      <span id="title">
+        The Path
         <button
           id="createSpreadBtn"
           type="submit"
           onclick="createSpread(event)"
         >
-          🎲 Create Spread 🎲
+          🎲
         </button>
-      </form>
+    </span>
     </header>
 
     <div hx-get="/getAllDiceRollsDOM" hx-trigger="load" id="allRolls">
