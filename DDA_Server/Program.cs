@@ -103,8 +103,20 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
             interpretation = JsonSerializer.Deserialize<Interpretation>(roll.Interpretation, options);
         }
 
+        // Convert UTC to CST
+        TimeZoneInfo cstZone;
+        try
+        {
+            cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"); // Windows time zone ID
+        }
+        catch (TimeZoneNotFoundException)
+        {
+            cstZone = TimeZoneInfo.FindSystemTimeZoneById("America/Chicago"); // IANA time zone ID
+        }
+        DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(roll.Date, cstZone);
+
         stringBuilder.AppendLine($"<div class='dice-roll-card'>");
-        stringBuilder.AppendLine($"<h2>{roll.Date.ToString("MMMM d, yyyy - h:mmtt")}</h2>");
+        stringBuilder.AppendLine($"<h2>{cstTime.ToString("MMMM d, yyyy - h:mmtt")}</h2>");
         stringBuilder.AppendLine($"<span><b>ID: {roll.Id}</b></span>");
         stringBuilder.AppendLine("<hr>");
         stringBuilder.AppendLine("<div id='overview'>");
@@ -115,7 +127,7 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
         stringBuilder.AppendLine("<table id='resultTable'>");
         // Add table rows for each dice roll
         stringBuilder.AppendLine("<tr><th>Dice</th><th>Result</th><th>Interpretation</th></tr>");
-        
+
         stringBuilder.AppendLine($"<tr><th>D2</th><td>{roll.D2}</td><td>{interpretation?.Dice_interpretations["d2"]}</td></tr>");
         stringBuilder.AppendLine($"<tr><th>D4</th><td>{roll.D4}</td><td>{interpretation?.Dice_interpretations["d4"]}</td></tr>");
         stringBuilder.AppendLine($"<tr><th>D6</th><td>{roll.D6}</td><td>{interpretation?.Dice_interpretations["d6"]}</td></tr>");
