@@ -1,12 +1,13 @@
 // Basic Configurations and Imports
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks.Dataflow;
 using Controllers;
 using Dice.Context;
 using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 using ChatGPT;
+using Astrology;
+using RC.Moon;
 
 // Load Environment Variables
 DotEnv.Load();
@@ -142,6 +143,18 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
     return Results.Content(stringBuilder.ToString(), "text/html");
 })
 .WithName("GetAllDiceRollsDOM")
+.WithOpenApi();
+
+// Route to GET lundar data for current day
+app.MapGet("/getLunar/",  () =>
+{
+    Console.WriteLine("Getting lunar data...");
+    Lunar lunar = new();
+    Dictionary<string, object> currentMoonPhase = lunar.PrintCurrentMoonPhase();
+
+    return Results.Ok(currentMoonPhase);
+})
+.WithName("GetLunar")
 .WithOpenApi();
 
 // Run the Server (Default: localhost:5036)
