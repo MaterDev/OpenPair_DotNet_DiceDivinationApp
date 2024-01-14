@@ -46,6 +46,7 @@ public class DiceSpread
             D12 = (int)diceRolls["d12"],
             D20 = (int)diceRolls["d20"],
             Date = DateTime.UtcNow,
+            Interpretation= ""
         };
 
         var chatGptRequest = ChatGPTController.FormatRequestForChatGPT(diceSpread);
