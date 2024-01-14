@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lugrasimo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
 
 /* CSS Variables for Pastel Yellow and Purple Themed Colors */
 :root {
@@ -22,21 +22,22 @@ body {
 }
 
 #pageHeader {
-    padding: 5px;
     color: var(--secondary-bg-color);
     text-align: center;
+    background-color: rgba(113, 72, 5, 0.685);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #title {
-    background-color: rgba(33, 33, 33, 0.837); /* Semi-transparent white for header */
     color: var(--primary-text-color);
-    font-family: 'Lugrasimo', cursive;
-    font-size: clamp(2rem, 8vw, 5rem);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: clamp(2rem, 12vw, 5rem);
     text-align: center;
-    margin: 5px;
     animation: color-change 10s infinite;
-    text-shadow: 0 0 10px black, 0 0 20px white, 0 0 30px white, 0 0 40px white;
-
+    text-shadow: 0 0 5px rgb(102, 70, 0), 0 0 10px white, 0 0 15px rgb(255, 226, 111), 0 0 20px white;
+    margin-left: 15px;
 }
 
 @keyframes color-change {
@@ -99,11 +100,9 @@ body {
     color: rgb(96, 96, 96);
     cursor: pointer;
     font-size: clamp(2rem, 8vw, 4rem);
-    margin: auto;
     padding: 5px 10px;
     border-radius: 50px;
     transition: background-color 0.3s ease, color 0.3s ease;
-
     animation: spin 5s linear infinite;
 }
 
@@ -126,7 +125,7 @@ body {
     animation: blink 1s linear infinite;
     margin: 10px;
     color: var(--primary-text-color);
-    font-size: clamp(8px, 4vw, 20px);
+    font-size: clamp(8px, 5vw, 30px);
     text-shadow: 0 0 10px var(--primary-bg-color), 0 0 20px var(--primary-bg-color), 0 0 30px var(--primary-bg-color), 0 0 40px var(--primary-bg-color);
 
 

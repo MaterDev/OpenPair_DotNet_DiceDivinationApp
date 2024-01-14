@@ -8,9 +8,10 @@
   </head>
   <body>
     <header id="pageHeader">
-      <div id="title">
+      <span id="title">
         The Path
-        </div>
+        </span>
+        <span id="pleaseWait"></span>
         <button
           id="createSpreadBtn"
           type="submit"
@@ -32,7 +33,7 @@
         event.preventDefault();
 
         // Display a loader
-        document.getElementById("pageHeader").innerHTML +=
+        document.getElementById("pleaseWait").innerHTML +=
           '<div id="loader">Creating... (Please Meditate)</div>';
 
         // Loading audio for while the request is being made
