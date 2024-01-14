@@ -116,16 +116,27 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
         }
         DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(roll.Date, cstZone);
 
-        stringBuilder.AppendLine($"<div class='dice-roll-card'>");
-        stringBuilder.AppendLine($"<h2>{cstTime.ToString("MMMM d, yyyy - h:mmtt")}</h2>");
-        stringBuilder.AppendLine($"<span><b>ID: {roll.Id}</b></span>");
+        stringBuilder.AppendLine($"<div class='diceRollCard'>");
+        stringBuilder.AppendLine($"<h2 class='diceRollCardTime'>{cstTime.ToString("MMMM d, yyyy - h:mmtt")}</h2>");
+        stringBuilder.AppendLine($"<span class='diceRollCardID'><b>ID: {roll.Id}</b></span>");
+
         stringBuilder.AppendLine("<hr>");
-        stringBuilder.AppendLine("<div id='overview'>");
-        stringBuilder.AppendLine("<h3>Overview</h3>");
-        stringBuilder.AppendLine($"<p>{interpretation?.Overview_interpretation}</p>");
+
+        // Add moon phase to card
+        stringBuilder.AppendLine("<div class='lunarDataSection'>");
+        stringBuilder.AppendLine("<span class='lundarPhaseTxt'>Luna creciente</span>");
+        stringBuilder.AppendLine("<span class='lundarPhaseEmoji'>🌒️ - </span>");
+        stringBuilder.AppendLine("<span class='lundarZodiacTxt'>Acuario</span>");
+        stringBuilder.AppendLine("<span class='lundarZodiacEmoji'>♒</span>");
+        stringBuilder.AppendLine("</div>");
+        
+        stringBuilder.AppendLine("<hr>");
+        stringBuilder.AppendLine("<div class='overviewSection'>");
+        stringBuilder.AppendLine("<h3 class='overviewTitle'>Overview</h3>");
+        stringBuilder.AppendLine($"<p class='overviewText'>{interpretation?.Overview_interpretation}</p>");
         stringBuilder.AppendLine("</div>");
 
-        stringBuilder.AppendLine("<table id='resultTable'>");
+        stringBuilder.AppendLine("<table class='resultTable'>");
         // Add table rows for each dice roll
         stringBuilder.AppendLine("<tr><th>Dice</th><th>Result</th><th>Interpretation</th></tr>");
 

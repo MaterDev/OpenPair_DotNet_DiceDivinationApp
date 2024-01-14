@@ -62,7 +62,7 @@ body {
 }
 
 /* Card styles */
-.dice-roll-card {
+.diceRollCard {
     background-color: var(--secondary-bg-color);
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -72,19 +72,19 @@ body {
     box-sizing: border-box;
 }
 
-.dice-roll-card table {
+.diceRollCard table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.dice-roll-card th, .dice-roll-card td {
+.diceRollCard th, .diceRollCard td {
     border: 1px solid var(--border-color);
     padding: 8px;
     text-align: left;
     background-color: var(--primary-bg-color);
 }
 
-#resultTable {
+.resultTable {
     background-color: var(--secondary-bg-color);
     border-collapse: collapse;
     width: 100%;
@@ -132,13 +132,13 @@ body {
 }
 
 @media (max-width: 1400px) {
-    .dice-roll-card {
+    .diceRollCard {
         width: 45%;
     }
 }
 
 @media (max-width: 1000px) {
-    .dice-roll-card {
+    .diceRollCard {
         width: 100%;
     }
 }
