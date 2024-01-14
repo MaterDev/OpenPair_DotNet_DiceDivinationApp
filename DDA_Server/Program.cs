@@ -161,7 +161,7 @@ app.MapGet("/getLunar/",  () =>
 {
     Console.WriteLine("Getting lunar data...");
     Lunar lunar = new();
-    Dictionary<string, object> currentMoonPhase = lunar.PrintCurrentMoonPhase();
+    Dictionary<string, object> currentMoonPhase = lunar.GetCurrentMoonPhase();
 
     return Results.Ok(currentMoonPhase);
 })
