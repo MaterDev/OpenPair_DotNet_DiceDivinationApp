@@ -19,5 +19,7 @@ namespace Dice.Entities
         public required string Interpretation { get; set; }
 
         public DateTime Date { get; set; }
+
+        public required string LunarData { get; set; }
     }
 }

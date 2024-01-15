@@ -7,7 +7,6 @@ using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 using ChatGPT;
 using Astrology;
-using RC.Moon;
 
 // Load Environment Variables
 DotEnv.Load();
@@ -120,17 +119,22 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
         stringBuilder.AppendLine($"<h2 class='diceRollCardTime'>{cstTime.ToString("MMMM d, yyyy - h:mmtt")}</h2>");
         stringBuilder.AppendLine($"<span class='diceRollCardID'><b>ID: {roll.Id}</b></span>");
 
-        stringBuilder.AppendLine("<hr>");
-
+        LunarData? lunarData = null;
         // Add moon phase to card
-        stringBuilder.AppendLine("<div class='lunarDataSection'>");
-        stringBuilder.AppendLine("<span class='lundarPhaseTxt'>Waxing Crescent</span>");
-        stringBuilder.AppendLine("<span class='lundarPhaseEmoji'>🌒️ - </span>");
-        stringBuilder.AppendLine("<span class='lundarZodiacTxt'>Pisces</span>");
-        stringBuilder.AppendLine("<span class='lundarZodiacEmoji'>♓</span>");
-        stringBuilder.AppendLine("</div>");
-        
-        stringBuilder.AppendLine("<hr>");
+        if (!string.IsNullOrEmpty(roll.LunarData))
+        {
+            lunarData = JsonSerializer.Deserialize<LunarData>(roll.LunarData, options);
+
+            stringBuilder.AppendLine("<hr>");
+            stringBuilder.AppendLine("<div class='lunarDataSection'>");
+            stringBuilder.AppendLine($"<span class='lundarPhaseTxt'>{lunarData?.Phase}</span>");
+            stringBuilder.AppendLine($"<span class='lundarPhaseEmoji'>{lunarData?.Moon_phase_emoji} - </span>");
+            stringBuilder.AppendLine($"<span class='lundarZodiacTxt'>{lunarData?.Zodiac}</span>");
+            stringBuilder.AppendLine($"<span class='lundarZodiacEmoji'>{lunarData?.Zodiac_emoji}</span>");
+            stringBuilder.AppendLine("</div>");
+            stringBuilder.AppendLine("<hr>");
+        }
+
         stringBuilder.AppendLine("<div class='overviewSection'>");
         stringBuilder.AppendLine("<h3 class='overviewTitle'>Overview</h3>");
         stringBuilder.AppendLine($"<p class='overviewText'>{interpretation?.Overview_interpretation}</p>");
@@ -157,7 +161,7 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
 .WithOpenApi();
 
 // Route to GET lundar data for current day
-app.MapGet("/getLunar/",  () =>
+app.MapGet("/getLunar/", () =>
 {
     Console.WriteLine("Getting lunar data...");
     Lunar lunar = new();

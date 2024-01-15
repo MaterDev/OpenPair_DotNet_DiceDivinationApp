@@ -5,6 +5,7 @@ using Translator;
 
 public class Lunar
 {
+    
     public Dictionary<string, object> GetCurrentMoonPhase()
     {
         Translator translator = new();

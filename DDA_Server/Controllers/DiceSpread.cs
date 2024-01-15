@@ -1,3 +1,4 @@
+using Astrology;
 using Dice;
 using Dice.Context;
 using Newtonsoft.Json;
@@ -34,6 +35,8 @@ public class DiceSpread
 
     private static async Task WriteResults(Dictionary<String, object> diceRolls)
         {
+         var allLunarData = new Astrology.Lunar();
+
 
         using var context = new DiceContext();
         var diceSpread = new Dice.Entities.DiceSpread
@@ -46,6 +49,7 @@ public class DiceSpread
             D12 = (int)diceRolls["d12"],
             D20 = (int)diceRolls["d20"],
             Date = DateTime.UtcNow,
+            LunarData = JsonConvert.SerializeObject(allLunarData.GetCurrentMoonPhase()),
             Interpretation= ""
         };
 
