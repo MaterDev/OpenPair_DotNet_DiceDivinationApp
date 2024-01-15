@@ -124,10 +124,10 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
 
         // Add moon phase to card
         stringBuilder.AppendLine("<div class='lunarDataSection'>");
-        stringBuilder.AppendLine("<span class='lundarPhaseTxt'>Luna creciente</span>");
+        stringBuilder.AppendLine("<span class='lundarPhaseTxt'>Waxing Crescent</span>");
         stringBuilder.AppendLine("<span class='lundarPhaseEmoji'>🌒️ - </span>");
-        stringBuilder.AppendLine("<span class='lundarZodiacTxt'>Acuario</span>");
-        stringBuilder.AppendLine("<span class='lundarZodiacEmoji'>♒</span>");
+        stringBuilder.AppendLine("<span class='lundarZodiacTxt'>Pisces</span>");
+        stringBuilder.AppendLine("<span class='lundarZodiacEmoji'>♓</span>");
         stringBuilder.AppendLine("</div>");
         
         stringBuilder.AppendLine("<hr>");
