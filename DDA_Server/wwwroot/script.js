@@ -41,24 +41,38 @@ function createSpread(event) {
 }
 
 function rollImage(event) {
+
+    console.log('Rolling Image');
+
+    let allImageRollBtns = document.querySelectorAll('.rollImageBtn');
+    console.log('All Image Roll Buttons: ' + allImageRollBtns);
+    console.log(allImageRollBtns);
+    allImageRollBtns.forEach(element => {
+        console.log(element);
+        element.disabled = true;
+    });
+
     console.log('Element ID: ' + event.target);
     let id = event.target.id;
-    let cardID = event.target.getAttribute('data-cardId')
-
-    console.log('Card ID: ' + cardID);
-    // disable the button by id, while fetch is running.
-    document.getElementById(id).disabled = true;
+    let cardID = event.target.getAttribute('data-cardid')
     
     fetch("/createDalle3/" + cardID, { method: "POST" })
         .then((response) => {
             console.log("Success:", response);
-            // enable the button by id, after fetch is done.
-            document.getElementById(id).disabled = false;
+            // enable all rollImage buttons after fetch is done.
+            allImageRollBtns.forEach(element => {
+                console.log(element);
+                element.disabled = false;
+            });
             location.reload();
         })
         .catch((error) => {
             console.error("Error:", error);
-            // enable the button by id, after fetch is done.
+            // enable all rollImage buttons after fetch is done.
+            allImageRollBtns.forEach(element => {
+                console.log(element);
+                element.disabled = false;
+            });
             document.getElementById(id).disabled = false;
         });
 }

@@ -125,7 +125,7 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
 
         stringBuilder.AppendLine($"<div class='rollCardOptions'>");
 
-        stringBuilder.AppendLine($"<button class='rollImageBtn' id='rollImageBtn-{roll.Id}' data-cardId='{roll.Id}' onclick='rollImage(event)'>Roll Image</button>");
+        stringBuilder.AppendLine($"<button class='rollImageBtn' id='rollImageBtn-{roll.Id}' data-cardid='{roll.Id}' onclick='rollImage(event)'>Roll Image</button>");
 
 
         stringBuilder.AppendLine($"</div>");

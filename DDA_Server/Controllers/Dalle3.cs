@@ -65,7 +65,10 @@ class Dalle3Controller
                         Lower values: Concrete, representational imagery.
                         Higher values: Abstract, symbolic imagery.
                     
-                    First write a prompt for the image. Then check if it has characters. If there are characters, theyshould represent African, African American, or African Diaspora heritage. Any detail or themes in the image fit into the world of a fantasy version of Afro-Centric Folklore in the year 1888- in a cinematic style. Exclude dice and text-related elements from the image.
+                    First write a prompt for the image. Then check if it has characters. If there are characters, theyshould represent African, African American, or African Diaspora heritage.
+                    Any detail or themes in the image fit into the world of a fantasy version of Afro-Centric Folklore in the year 1888- in a cinematic style.
+                    Exclude dice and text-related elements from the image. The prompt for the image that is created should not contain any reference to 'dice', specific text, quotes, letters, numbers.
+                    The image prompt is purely a description of a scene, character, environment, action, ect. that should be illustrated.
                 ""
                 ";
 
