@@ -21,5 +21,7 @@ namespace Dice.Entities
         public DateTime Date { get; set; }
 
         public required string LunarData { get; set; }
+
+        public string? Dalle3ImageUrl { get; set; }
     }
 }

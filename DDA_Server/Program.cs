@@ -7,6 +7,7 @@ using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 using ChatGPT;
 using Astrology;
+using System.Threading.Tasks.Dataflow;
 
 // Load Environment Variables
 DotEnv.Load();
@@ -135,6 +136,14 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
             stringBuilder.AppendLine("<hr>");
         }
 
+        // Add Dalle3 image to card
+        if (!string.IsNullOrEmpty(roll.Dalle3ImageUrl))
+        {
+            stringBuilder.AppendLine("<div class='dalle3Section'>");
+            stringBuilder.AppendLine($"<img class='dalle3Img' src='{roll.Dalle3ImageUrl}' alt='Dalle3 Image'>");
+            stringBuilder.AppendLine("</div>");
+        }
+
         stringBuilder.AppendLine("<div class='overviewSection'>");
         stringBuilder.AppendLine("<h3 class='overviewTitle'>Overview</h3>");
         stringBuilder.AppendLine($"<p class='overviewText'>{interpretation?.Overview_interpretation}</p>");
@@ -171,6 +180,42 @@ app.MapGet("/getLunar/", () =>
 })
 .WithName("GetLunar")
 .WithOpenApi();
+
+// Route to get Dalle3 for a roll, by ID
+app.MapGet("/createDalle3/{id}", async (int id) =>
+{
+    using var context = new DiceContext();
+    var diceSpread = await context.DiceSpread.FindAsync(id);
+
+    if (diceSpread == null)
+    {
+        return Results.NotFound("DiceSpread not found.");
+    }
+
+    var dalle3Request = Dalle3Controller.FormattedRequestForDalle3(diceSpread);
+    var dalle3Response = await Dalle3Controller.SendRequestToDalle3(dalle3Request);
+
+    if (diceSpread != null)
+    {
+        // Update existing entity
+        diceSpread.Dalle3ImageUrl = dalle3Response.ImageUrl;
+        context.Entry(diceSpread).State = EntityState.Modified;
+        try
+        {
+            // Save changes to the database
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return Results.BadRequest("Something went wrong.");
+        }
+
+    }
+    return Results.Ok(dalle3Response);
+
+})
+.WithName("CreateDalle3")
+.WithOpenApi(); ;
 
 // Run the Server (Default: localhost:5036)
 app.Run();

@@ -142,3 +142,10 @@ body {
         width: 100%;
     }
 }
+
+
+.dalle3Img {
+    /* 100% the width of its parent container */
+    width: 100%;
+    /* 100% the height of its parent container */
+}
