@@ -17,19 +17,55 @@ class Dalle3Controller
 
             string prompt = $@"
                 ""
-                Create an image in square format that visually represents the following interpretation from a dice divination:
+                Having rolled a series of dice, I obtained these results:
+                    - d2Result: {diceSpread.D2}
+                    - d4Result: {diceSpread.D4}
+                    - d6Result: {diceSpread.D6}
+                    - d8Result: {diceSpread.D8}
+                    - d10_100Result: {diceSpread.D10_100}
+                    - d12Result: {diceSpread.D12}
+                    - d20Result: {diceSpread.D20}
 
-                The interpretation overview details is: {diceInterpretation?.OverviewInterpretation}
+                Create a marketing illustration inspired by dice divination results, with each dice outcome influencing the image differently:
 
-                Here are the dice interpretation details: {diceInterpretation?.DiceInterpretations}
+                    d2Result (Masculinity/Femininity):
+                        d2Result = 1: Masculine character.
+                        d2Result = 2: Feminine character.
+                    
+                    d6Result (Age Group):
+                        1-2: Child character.
+                        3-5: Adult character.
+                        6: Elder character.
+                   
+                    d8Result (Theme, 10x weight):
+                        1: Incorporate tendrils or vines for a connection theme.
+                        2: Dynamic scene with movement.
+                        3: Lens effects for visual distortion.
+                        4: Balance and symmetry.
+                        5: Creation theme with a golem spirit or sacred object.
+                        6: Focus on dramatic facial expressions, with a holographic x-ray effect.
+                        7: Feature the all-seeing-eye.
+                        8: Safe and secure environment.
+                    
+                    d12Result (Jungian Archetype):
+                        1: Ruler's staff.
+                        2: Creator's tools.
+                        3: Sage's study.
+                        4: Innocent's perspective (POV).
+                        5: Explorer's world.
+                        6: Rebel's enemy monster.
+                        7: Hero's defeat.
+                        8: Wizard creating sacred geometry.
+                        9: Jester's humorous pose.
+                        10: Everyman resting.
+                        11: Lover with partner.
+                        12: Caregiver with a child.
 
-                Details:
-
-                Use the aformenteioned details from the interpretation overview and the dice interpretation details to create an image that visually represents the interpretation.
-
-                First create an image prompt that represents the interpretation overview details. Then create an image prompt for each of the dice interpretation details. Then combine all of the image prompts into one image prompt. Then use the combined image prompt to create an image that visually represents the interpretation. This should be an image that incorporates which evever of the Jungian archetypes, in the context of details that can be gleamed from the prompt. Include both abstract and concrete elements.
-
-                Pick a style, theme, color scheme, visual metaphor, and other details that are relevant. The common theme is that the image shuould have something to do with a Hoodoo Cross. Any characters in the image prompt should be specifically African American, Black Native, African, or African Diaspora. The general time period depicted in the image should be around 1888. Image doesnt need to necessarily be literal or realistic to the detailes provided.
+                    d10_100Result (Abstract vs. Concrete):
+                        Lower values: Concrete, representational imagery.
+                        Higher values: Abstract, symbolic imagery.
+                    
+                    First write a prompt for the image. Then check if it has characters. If there are characters, theyshould represent African, African American, or African Diaspora heritage. Any detail or themes in the image fit into the world of a fantasy version of Afro-Centric Folklore in the year 1888- in a cinematic style. Exclude dice and text-related elements from the image.
                 ""
                 ";
 
