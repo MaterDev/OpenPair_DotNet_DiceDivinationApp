@@ -116,9 +116,21 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
         }
         DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(roll.Date, cstZone);
 
-        stringBuilder.AppendLine($"<div class='diceRollCard'>");
+        stringBuilder.AppendLine($"<div class='diceRollCard' id='rollCard-id-{roll.Id}' data-rollCard-id='{roll.Id}'>");
+
+        stringBuilder.AppendLine($"<div class='rollCardHeader'>");
         stringBuilder.AppendLine($"<h2 class='diceRollCardTime'>{cstTime.ToString("MMMM d, yyyy - h:mmtt")}</h2>");
-        stringBuilder.AppendLine($"<span class='diceRollCardID'><b>ID: {roll.Id}</b></span>");
+        stringBuilder.AppendLine($"<h3 class='diceRollCardID'>ID: {roll.Id}</h3>");
+        stringBuilder.AppendLine($"</div>");
+
+        stringBuilder.AppendLine($"<div class='rollCardOptions'>");
+
+        stringBuilder.AppendLine($"<button class='rollImageBtn' id='rollImageBtn-{roll.Id}' data-cardId='{roll.Id}' onclick='rollImage(event)'>Roll Image</button>");
+
+
+        stringBuilder.AppendLine($"</div>");
+
+
 
         LunarData? lunarData = null;
         // Add moon phase to card
@@ -182,8 +194,9 @@ app.MapGet("/getLunar/", () =>
 .WithOpenApi();
 
 // Route to get Dalle3 for a roll, by ID
-app.MapGet("/createDalle3/{id}", async (int id) =>
+app.MapPost("/createDalle3/{id}", async (int id) =>
 {
+    Console.WriteLine($"Creating Dalle3 for roll ID: {id}");
     using var context = new DiceContext();
     var diceSpread = await context.DiceSpread.FindAsync(id);
 

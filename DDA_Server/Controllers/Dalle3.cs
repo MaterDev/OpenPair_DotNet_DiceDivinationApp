@@ -69,7 +69,7 @@ class Dalle3Controller
                 ""
                 ";
 
-            Console.WriteLine($"FormattedRequestForDalle3, prompt: {prompt}");
+            // Console.WriteLine($"FormattedRequestForDalle3, prompt: {prompt}");
             return prompt;
 
         }

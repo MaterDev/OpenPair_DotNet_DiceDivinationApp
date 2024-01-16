@@ -1,71 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Path</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header id="pageHeader">
-      <span id="title">
-        The Path
-        </span>
-        <span id="pleaseWait"></span>
-        <button
-          id="createSpreadBtn"
-          type="submit"
-          onclick="createSpread(event)"
-        >
-          🎲
-        </button>
-    </header>
 
-    <div hx-get="/getAllDiceRollsDOM" hx-trigger="load" id="allRolls">
-      <!-- Dice rolls will be loaded here -->
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Path</title>
+  <script defer src="https://unpkg.com/htmx.org"></script>
+  <script defer src="./script.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    <script src="https://unpkg.com/htmx.org"></script>
+<body>
+  <header id="pageHeader">
+    <span id="title">
+      The Path
+    </span>
+    <span id="pleaseWait"></span>
+    <button id="createSpreadBtn" type="submit" onclick="createSpread(event)">
+      🎲
+    </button>
+  </header>
 
-    <script>
-      function createSpread(event) {
-        // Prevent form submission from refreshing the page
-        event.preventDefault();
+  <div hx-get="/getAllDiceRollsDOM" hx-trigger="load" id="allRolls">
+    <!-- Dice rolls will be loaded here -->
+  </div>
 
-        // Display a loader
-        document.getElementById("pleaseWait").innerHTML +=
-          '<div id="loader">Creating... (Please Meditate)</div>';
+</body>
 
-        // Loading audio for while the request is being made
-        var loadingAudio = new Audio(
-          "/assets/uplifting-pad-texture-113842.mp3"
-        );
-        loadingAudio.play();
-
-        // Done audio for when the request is complete
-        var doneAudio = new Audio("/assets/hotel-bell-ding-1-174457.mp3");
-
-        fetch("/createSpread", { method: "POST" })
-          .then((response) => {
-            // Once the request is complete, remove the loader, stop the audio, and refresh the page
-            document.getElementById("loader").remove();
-            loadingAudio.pause();
-            loadingAudio.currentTime = 0;
-            doneAudio.play();
-            // Reload the page after the done audio has finished
-            doneAudio.onended = function () {
-              console.log("done");
-              location.reload();
-            };
-          })
-          .catch((error) => {
-            // If there's an error, remove the loader, stop the audio, and display the error
-            document.getElementById("loader").remove();
-            audio.pause();
-            audio.currentTime = 0;
-            console.error("Error:", error);
-          });
-      }
-    </script>
-  </body>
 </html>
