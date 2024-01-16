@@ -13,9 +13,7 @@
 - **Divination Interpretation**: Generates insightful readings based on the unique combination of dice rolls.
 - **JSON Data Handling**: Efficiently structures and parses JSON data for server-client communication.
 
-| Screenshot 1 | Screenshot 2 |
-|--------------|--------------|
-| ![Screenshot1](./images/Screenshot_1.png) | ![Screenshot2](./images/Screenshot_2.png) |
+![Screenshot2](./images/Screenshot_2.png)
 
 ## Getting Started
 
