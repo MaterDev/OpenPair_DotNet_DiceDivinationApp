@@ -206,7 +206,7 @@ app.MapPost("/createDalle3/{id}", async (int id) =>
     }
 
     var dalle3Request = Dalle3Controller.FormattedRequestForDalle3(diceSpread);
-    var dalle3Response = await Dalle3Controller.SendRequestToDalle3(dalle3Request);
+    var dalle3Response = await Dalle3Controller.SendRequestToDalle3(dalle3Request, id);
 
     if (diceSpread != null)
     {

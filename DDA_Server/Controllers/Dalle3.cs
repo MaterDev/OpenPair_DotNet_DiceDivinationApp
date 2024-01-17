@@ -80,15 +80,19 @@ class Dalle3Controller
         return "An all red image with a big black x!!!!";
     }
 
-    public static async Task<Dalle3Response> SendRequestToDalle3(string request)
+    public static async Task<Dalle3Response> SendRequestToDalle3(string request, int diceSpreadId)
     {
 
         var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+        if (apiKey == null)
+        {
+            throw new Exception("Environment variable OPENAI_API_KEY is not set.");
+        }
         var client = new OpenAIAPI(apiKey);
 
         try
         {
-            var dalle3Response = await client.ImageGenerations.CreateImageAsync(
+            ImageResult dalle3Response = await client.ImageGenerations.CreateImageAsync(
                 new ImageGenerationRequest(
                     request,
                     OpenAI_API.Models.Model.DALLE3,
@@ -97,12 +101,13 @@ class Dalle3Controller
                     )
                 );
 
-            Console.WriteLine($"Dalle3 response: {dalle3Response.Data[0].Url}");
+            var base64Data = dalle3Response.Data[0]. Base64Data;
+            var localStorage = new Dalle3LocalStorage();
+            string? imageUrl = await localStorage.DownloadAndSaveImage(dalle3Response, diceSpreadId.ToString());
 
-            var responseContent = dalle3Response.Data[0].Url;
             return new Dalle3Response
             {
-                ImageUrl = responseContent
+                ImageUrl = imageUrl
             };
         }
         catch (Exception ex)
