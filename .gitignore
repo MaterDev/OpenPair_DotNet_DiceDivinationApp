@@ -398,3 +398,6 @@ FodyWeavers.xsd
 *.sln.iml
 
 .env
+
+# Application storage in wwwroot folder
+DDA_Server/wwwroot/storage

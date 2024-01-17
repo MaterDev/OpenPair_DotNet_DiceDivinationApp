@@ -124,7 +124,7 @@ body {
 #loader {
     animation: blink 1s linear infinite;
     margin: 10px;
-    color: var(--primary-text-color);
+    color: var(--accent-color);
     font-size: clamp(8px, 5vw, 30px);
     text-shadow: 0 0 10px var(--primary-bg-color), 0 0 20px var(--primary-bg-color), 0 0 30px var(--primary-bg-color), 0 0 40px var(--primary-bg-color);
 
