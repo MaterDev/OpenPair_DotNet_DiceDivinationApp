@@ -1,6 +1,6 @@
 # OpenPair: Dice Divination App
 
-![Cover](images/cover.png)
+![Screenshot2](./images/Screenshot.png)
 
 ## Project Description
 
@@ -12,8 +12,6 @@
 - **OpenAI ChatGPT Integration**: Communicates with OpenAI's ChatGPT to provide numerological and gamatria interpretations of dice rolls.
 - **Divination Interpretation**: Generates insightful readings based on the unique combination of dice rolls.
 - **JSON Data Handling**: Efficiently structures and parses JSON data for server-client communication.
-
-![Screenshot2](./images/Screenshot.png)
 
 ## Getting Started
 
