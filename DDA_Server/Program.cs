@@ -14,6 +14,19 @@ DotEnv.Load();
 
 // Configure WebApplication Builder
 var builder = WebApplication.CreateBuilder(args);
+
+// Allow CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -35,7 +48,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Route for Creating a New Dice Spread
-app.MapPost("/createSpread", async (HttpContext context) =>
+app.MapPost("/api/createSpread", async (HttpContext context) =>
 {
     Dictionary<String, object> spread = await DiceSpread.RollResults();
     return Results.Ok("New spread created successfully!");
@@ -44,7 +57,7 @@ app.MapPost("/createSpread", async (HttpContext context) =>
 .WithOpenApi();
 
 // Route for Interpreting a Specific Dice Spread
-app.MapGet("/interpretDice/{id}", async (int id) =>
+app.MapGet("/api/interpretDice/{id}", async (int id) =>
 {
     using var context = new DiceContext();
     var diceSpread = await context.DiceSpread.FindAsync(id);
@@ -63,7 +76,7 @@ app.MapGet("/interpretDice/{id}", async (int id) =>
 .WithOpenApi();
 
 // Define a GET route to retrieve all dice rolls
-app.MapGet("/getAllDiceRolls", async () =>
+app.MapGet("/api/getAllDiceRolls", async () =>
 {
     using var context = new DiceContext();
     var allDiceRolls = await context.DiceSpread.ToListAsync();
@@ -78,7 +91,7 @@ app.MapGet("/getAllDiceRolls", async () =>
 .WithOpenApi();
 
 // Route for Getting All Dice Rolls in HTML Format
-app.MapGet("/getAllDiceRollsDOM", async () =>
+app.MapGet("/api/getAllDiceRollsDOM", async () =>
 {
     using var context = new DiceContext();
     var allDiceRolls = await context.DiceSpread.OrderByDescending(roll => roll.Date).ToListAsync();
@@ -182,7 +195,7 @@ app.MapGet("/getAllDiceRollsDOM", async () =>
 .WithOpenApi();
 
 // Route to GET lundar data for current day
-app.MapGet("/getLunar/", () =>
+app.MapGet("/api/getLunar/", () =>
 {
     Console.WriteLine("Getting lunar data...");
     Lunar lunar = new();
@@ -194,7 +207,7 @@ app.MapGet("/getLunar/", () =>
 .WithOpenApi();
 
 // Route to get Dalle3 for a roll, by ID
-app.MapPost("/createDalle3/{id}", async (int id) =>
+app.MapPost("/api/createDalle3/{id}", async (int id) =>
 {
     Console.WriteLine($"Creating Dalle3 for roll ID: {id}");
     using var context = new DiceContext();
