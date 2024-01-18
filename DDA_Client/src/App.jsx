@@ -4,9 +4,6 @@ import DiceCards from './DiceCards/DiceCards'
 
 function App() {
 
-
-  console.log("Script loaded");
-
   function createSpread(event) {
       // Prevent form submission from refreshing the page
       event.preventDefault();
@@ -43,44 +40,6 @@ function App() {
               loadingAudio.pause();
               loadingAudio.currentTime = 0;
               console.error("Error:", error);
-          });
-  }
-  
-  // eslint-disable-next-line no-unused-vars
-  function rollImage(event) {
-  
-      console.log('Rolling Image');
-  
-      let allImageRollBtns = document.querySelectorAll('.rollImageBtn');
-      console.log('All Image Roll Buttons: ' + allImageRollBtns);
-      console.log(allImageRollBtns);
-      allImageRollBtns.forEach(element => {
-          console.log(element);
-          element.disabled = true;
-      });
-  
-      console.log('Element ID: ' + event.target);
-      let id = event.target.id;
-      let cardID = event.target.getAttribute('data-cardid')
-      
-      fetch("/api/createDalle3/" + cardID, { method: "POST" })
-          .then((response) => {
-              console.log("Success:", response);
-              // enable all rollImage buttons after fetch is done.
-              allImageRollBtns.forEach(element => {
-                  console.log(element);
-                  element.disabled = false;
-              });
-              location.reload();
-          })
-          .catch((error) => {
-              console.error("Error:", error);
-              // enable all rollImage buttons after fetch is done.
-              allImageRollBtns.forEach(element => {
-                  console.log(element);
-                  element.disabled = false;
-              });
-              document.getElementById(id).disabled = false;
           });
   }
   

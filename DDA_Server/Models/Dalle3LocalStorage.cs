@@ -13,8 +13,8 @@ public async Task<string?> DownloadAndSaveImage(ImageResult imageResult, string 
         HttpClient httpClient = new HttpClient();
         byte[] imageBytes = await httpClient.GetByteArrayAsync(imageResult.ToString());
 
-        string imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "storage/images/diceSpreadRolledImages");
-        Directory.CreateDirectory(imagesDirectory);
+        string imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "../DDA_Client/public/storage/images/diceSpreadRolledImages");
+            Directory.CreateDirectory(imagesDirectory);
 
         string imagePath = Path.Combine(imagesDirectory, $"{diceSpreadId}.jpg");
 
