@@ -1,6 +1,4 @@
-/* eslint-disable react/no-unknown-property */
-import './App.css'
-import DiceCards from './DiceCards/DiceCards'
+import DiceReadings from './DiceReadings/DiceReadings'
 
 function App() {
 
@@ -57,7 +55,7 @@ function App() {
       </header>
 
       
-      <DiceCards />
+      <DiceReadings/>
     </>
   )
 }

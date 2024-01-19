@@ -76,7 +76,7 @@ app.MapGet("/api/interpretDice/{id}", async (int id) =>
 .WithOpenApi();
 
 // Define a GET route to retrieve all dice rolls
-app.MapGet("/api/getAllDiceRolls", async () =>
+app.MapGet("/api/getAllDiceSpreads", async () =>
 {
     using var context = new DiceContext();
     var allDiceRolls = await context.DiceSpread.ToListAsync();
@@ -87,11 +87,11 @@ app.MapGet("/api/getAllDiceRolls", async () =>
 
     return Results.Ok(allDiceRolls);
 })
-.WithName("GetAllDiceRolls")
+.WithName("GetAllDiceSpreads")
 .WithOpenApi();
 
 // Route for Getting All Dice Rolls in HTML Format
-app.MapGet("/api/getAllDiceRollsDOM", async () =>
+app.MapGet("/api/getAllDiceSpreadsDOM", async () =>
 {
     using var context = new DiceContext();
     var allDiceRolls = await context.DiceSpread.OrderByDescending(roll => roll.Date).ToListAsync();
@@ -191,7 +191,7 @@ app.MapGet("/api/getAllDiceRollsDOM", async () =>
 
     return Results.Content(stringBuilder.ToString(), "text/html");
 })
-.WithName("GetAllDiceRollsDOM")
+.WithName("GetAllDiceSpreadsDOM")
 .WithOpenApi();
 
 // Route to GET lundar data for current day

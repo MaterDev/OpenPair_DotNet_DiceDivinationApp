@@ -52,7 +52,7 @@ body {
     }
 }
 
-#allRolls {
+#allSpreads {
     flex-wrap: wrap;
     /* max-width: 1000px; */
     margin: auto;
@@ -62,7 +62,7 @@ body {
 }
 
 /* Card styles */
-.diceRollCard {
+.diceSpreadCard {
     background-color: var(--secondary-bg-color);
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -72,19 +72,19 @@ body {
     box-sizing: border-box;
 }
 
-.diceRollCard table {
+.diceSpreadCard table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.diceRollCard th, .diceRollCard td {
+.diceSpreadCard th, .diceRollCard td {
     border: 1px solid var(--border-color);
     padding: 8px;
     text-align: left;
     background-color: var(--secondary-bg-color);
 }
 
-.resultTable {
+.spreadResultTable {
     background-color: var(--secondary-bg-color);
     border-collapse: collapse;
     width: 100%;
@@ -151,20 +151,20 @@ body {
 }
 
 /* Items within the rollCardHeader class are on the same line but are sapced on opposite sides */
-.rollCardHeader {
+.spreadCardHeader {
     display: flex;
     justify-content: space-between;
     align-items:flex-end;
     
 }
 
-.rollCardOptions {
+.spreadCardOptions {
     display: flex;
     justify-content: flex-end;
 }
 
 /* Sleek button design */
-.rollImageBtn {
+.spreadImageBtn {
     background-color: var(--primary-bg-color);
     border: 0px;
     color: var(--accent-color);
@@ -177,7 +177,7 @@ body {
 }
 
 /* Style for disabled state */
-.rollImageBtn:disabled {
+.spreadImageBtn:disabled {
     background-color: #ccc; /* A light gray color for disabled state */
     color: #666; /* Darker text color for contrast */
     cursor: not-allowed; /* Cursor to indicate the button is not clickable */
