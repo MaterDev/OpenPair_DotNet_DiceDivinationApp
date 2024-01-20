@@ -79,7 +79,7 @@ app.MapGet("/api/interpretDice/{id}", async (int id) =>
 app.MapGet("/api/getAllDiceSpreads", async () =>
 {
     using var context = new DiceContext();
-    var allDiceRolls = await context.DiceSpread.ToListAsync();
+    var allDiceRolls = await context.DiceSpread.OrderByDescending(roll => roll.Date).ToListAsync();
     if (allDiceRolls == null || allDiceRolls.Count == 0)
     {
         return Results.NotFound("No dice rolls found.");
