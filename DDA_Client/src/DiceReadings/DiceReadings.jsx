@@ -1,24 +1,23 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios'
+import { useEffect } from 'react';
 import DiceSpreadCard from '../DiceSpreadCard/DiceSpreadCard';
+import { getAllDiceSpreads } from '../_utils';
 
-const DiceReadings = () => {
-  const [diceSpreadContent, setDiceSpreadContent] = useState([]);
+const DiceReadings = ({diceSpreadContent, setDiceSpreadContent}) => {
 
   useEffect(() => {
-    axios.get('/api/getAllDiceSpreads')
-      .then(response => {
-        console.log(response)
-        setDiceSpreadContent(response.data);
-      })
-      .catch(error => console.error('Error fetching dice rolls:', error));
+    getAllDiceSpreads(setDiceSpreadContent);
   }, []);
 
-  console.log("DiceSpreadContent:", diceSpreadContent)
   return (
       <div className='allSpreads'>
         {diceSpreadContent.map((spread) => {
-          return <DiceSpreadCard key={spread.id} spread={spread} />
+          return (
+              <DiceSpreadCard 
+                key={spread.id} 
+                spread={spread}
+                setDiceSpreadContent={setDiceSpreadContent}
+              />
+            )
         })}
       </div>
   );
