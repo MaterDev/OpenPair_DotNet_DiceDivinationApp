@@ -1,10 +1,7 @@
-import { useState } from "react";
-import axios from "axios";
+
 import DiceReadings from "./DiceReadings/DiceReadings";
 
 function App() {
-  const [diceSpreadContent, setDiceSpreadContent] = useState([]);
-
   const createSpread = (event) => {
     // Prevent form submission from refreshing the page
     event.preventDefault();
@@ -56,7 +53,7 @@ function App() {
         </button>
       </header>
 
-      <DiceReadings setDiceSpreadContent={setDiceSpreadContent} diceSpreadContent={diceSpreadContent}/>
+      <DiceReadings />
     </>
   );
 }

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { formatTime, getAllDiceSpreads } from '../_utils/';
 import RollImageButton from '../RollImageButton/RollImageButton';
 
-const DiceSpreadCard = ({ setDiceSpreadContent, spread }) => {
+const DiceSpreadCard = ({ spread }) => {
+
+    console.log('DiceSpreadCard.jsx - spread:', spread)
     const { id, lunarData, dalle3ImageUrl, interpretation } = spread
 
     // State for dall3 image
@@ -27,8 +29,6 @@ const DiceSpreadCard = ({ setDiceSpreadContent, spread }) => {
             {/* // ! Options - Section */}
             <div className='spreadCardOptions'>
                 <RollImageButton
-                    getAllDiceSpreads={getAllDiceSpreads} 
-                    setDiceSpreadContent={setDiceSpreadContent}
                     id={id}
                 />
             </div>

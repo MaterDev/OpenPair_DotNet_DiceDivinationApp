@@ -1,26 +1,29 @@
-import { useEffect } from 'react';
-import DiceSpreadCard from '../DiceSpreadCard/DiceSpreadCard';
-import { getAllDiceSpreads } from '../_utils';
+import { useEffect } from "react";
+import DiceSpreadCard from "../DiceSpreadCard/DiceSpreadCard";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllDiceSpreads } from "../_utils/get.requests.js";
 
-const DiceReadings = ({diceSpreadContent, setDiceSpreadContent}) => {
+const DiceReadings = () => {
+  const allSpreadCards = useSelector((state) => state.allSpreadCardsReducer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getAllDiceSpreads(setDiceSpreadContent);
-  }, []);
+    getAllDiceSpreads()
+    .then((data) => {
+      dispatch({ type: "LOAD_STATE", payload: data })
+    })
+    .catch((error) =>
+        console.error("Error DiceReadings(), getAllDiceSpreads:", error)
+      )
+  }, [])
 
   return (
-      <div className='allSpreads'>
-        {diceSpreadContent.map((spread) => {
-          return (
-              <DiceSpreadCard 
-                key={spread.id} 
-                spread={spread}
-                setDiceSpreadContent={setDiceSpreadContent}
-              />
-            )
-        })}
-      </div>
-  );
-};
+    <div className="allSpreads">
+      {allSpreadCards?.map((spread) => {
+        return <DiceSpreadCard key={spread.id} spread={spread} />;
+      })}
+    </div>
+  )
+}
 
 export default DiceReadings
