@@ -17,11 +17,12 @@ const RollImageButton = ({ id }) => {
     //! API request to create the image
     axios
       .post(`/api/createDalle3/${id}`)
-      .then((response) => {
+      .then(() => {
         
         //! After the image is created, we need to update the state of the app
         getAllDiceSpreads()
           .then((data) => {
+            console.log("Data from getAllDiceSpreads:", data)
             dispatch({ type: "LOAD_STATE", payload: data });
           })
           .catch((error) =>

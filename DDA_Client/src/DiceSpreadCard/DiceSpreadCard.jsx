@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types'
-import { formatTime, getAllDiceSpreads } from '../_utils/';
+import { formatTime } from '../_utils/';
 import RollImageButton from '../RollImageButton/RollImageButton';
 
 const DiceSpreadCard = ({ spread }) => {
@@ -9,7 +9,7 @@ const DiceSpreadCard = ({ spread }) => {
     const { id, lunarData, dalle3ImageUrl, interpretation } = spread
 
     // State for dall3 image
-    const [dalle3ImageUrlState, setDalle3ImageUrlState] = useState(dalle3ImageUrl);
+    // const [dalle3ImageUrlState, setDalle3ImageUrlState] = useState(dalle3ImageUrl);
 
     const diceTypes = ['d2', 'd4', 'd6', 'd8', 'd10_100', 'd12', 'd20'];
 
@@ -50,7 +50,7 @@ const DiceSpreadCard = ({ spread }) => {
             {/* // ! Dalle3 Image - Section */}
             {dalle3ImageUrl && (
                 <div className='dalle3Section'>
-                    <img className='dalle3Img' src={dalle3ImageUrlState} alt='Dalle3 Image' />
+                    <img className='dalle3Img' src={dalle3ImageUrl} alt='Dalle3 Image' />
                 </div>
             )}
             
