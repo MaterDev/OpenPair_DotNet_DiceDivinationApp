@@ -10,7 +10,7 @@ import './main.css';
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
-});;
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

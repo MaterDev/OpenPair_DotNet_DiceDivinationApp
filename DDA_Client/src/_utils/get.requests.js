@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getAllDiceSpreads = async (setDiceSpreadContent) => {
+export const getAllDiceSpreads = async () => {
     return axios
       .get("/api/getAllDiceSpreads")
       .then((response) => {

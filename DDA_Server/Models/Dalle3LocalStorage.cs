@@ -8,19 +8,18 @@ public async Task<string?> DownloadAndSaveImage(ImageResult imageResult, string 
 {
     try
     {
-
-        // Assuming imageResult.ImageUrl contains the URL to the image
         HttpClient httpClient = new HttpClient();
         byte[] imageBytes = await httpClient.GetByteArrayAsync(imageResult.ToString());
 
         string imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "../DDA_Client/public/storage/images/diceSpreadRolledImages");
-            Directory.CreateDirectory(imagesDirectory);
+        Directory.CreateDirectory(imagesDirectory);
 
-        string imagePath = Path.Combine(imagesDirectory, $"{diceSpreadId}.jpg");
+        string uniqueHash = Guid.NewGuid().ToString("N");
+        string imagePath = Path.Combine(imagesDirectory, $"{uniqueHash}_{diceSpreadId}.jpg");
 
         await File.WriteAllBytesAsync(imagePath, imageBytes);
 
-        string relativeUrl = $"/storage/images/diceSpreadRolledImages/{diceSpreadId}.jpg";
+        string relativeUrl = $"/storage/images/diceSpreadRolledImages/{uniqueHash}_{diceSpreadId}.jpg";
         return relativeUrl;
     }
     catch (Exception ex)

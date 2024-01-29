@@ -15,7 +15,7 @@ const DiceReadings = () => {
     .catch((error) =>
         console.error("Error DiceReadings(), getAllDiceSpreads:", error)
       )
-  })
+  }, [dispatch])
 
   return (
     <div className="allSpreads">

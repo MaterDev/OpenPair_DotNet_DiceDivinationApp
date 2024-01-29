@@ -1,12 +1,19 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types'
 import { formatTime } from '../_utils/';
 import RollImageButton from '../RollImageButton/RollImageButton';
+import { useState } from 'react';
 
 const DiceSpreadCard = ({ spread }) => {
 
     console.log('DiceSpreadCard.jsx - spread:', spread)
     const { id, lunarData, dalle3ImageUrl, interpretation } = spread
+    const [dalle3ImageUrlState, setDalle3ImageUrlState] = useState(dalle3ImageUrl);
+    const [imageLoading, setImageLoading] = useState(true);
+
+    const handleImageLoad = () => {
+      setImageLoading(false);
+    };
+
 
     // State for dall3 image
     // const [dalle3ImageUrlState, setDalle3ImageUrlState] = useState(dalle3ImageUrl);
@@ -30,6 +37,7 @@ const DiceSpreadCard = ({ spread }) => {
             <div className='spreadCardOptions'>
                 <RollImageButton
                     id={id}
+                    setDalle3ImageUrlState={setDalle3ImageUrlState}
                 />
             </div>
 
@@ -48,18 +56,23 @@ const DiceSpreadCard = ({ spread }) => {
             )}
 
             {/* // ! Dalle3 Image - Section */}
-            {dalle3ImageUrl && (
+            {dalle3ImageUrlState && (
                 <div className='dalle3Section'>
-                    <img className='dalle3Img' src={dalle3ImageUrl} alt='Dalle3 Image' />
-                </div>
+                    <img
+                        className='dalle3Img'
+                        src={dalle3ImageUrlState}
+                        alt='Dalle3 Image'
+                        onLoad={handleImageLoad}
+                        style={imageLoading ? { display: 'none' } : {}}
+                    />                </div>
             )}
-            
+
             {/* // ! Overview - Section */}
             <div className='overviewSection'>
                 <h3 className='overviewTitle'>Overview</h3>
                 <p className='overviewText'>{diceInterpretations.overview_interpretation}</p>
             </div>
-            
+
             {/* // ! Spread Results - Section */}
             <table className='spreadResultTable'>
                 <thead>

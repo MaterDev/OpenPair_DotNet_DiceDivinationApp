@@ -6,7 +6,7 @@ const allSpreadCardsReducer = (state = [], action) => {
         // If it is, return the current state
         return state;
       }
-      return action.payload;
+      return [...action.payload];
     }
     default:
       return state;
