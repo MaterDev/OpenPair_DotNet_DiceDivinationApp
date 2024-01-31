@@ -14,9 +14,8 @@ const DiceSpreadCard = ({ spread }) => {
       setImageLoading(false);
     };
 
-
-    // State for dall3 image
-    // const [dalle3ImageUrlState, setDalle3ImageUrlState] = useState(dalle3ImageUrl);
+    console.log("Dalle3 Image URL State:", dalle3ImageUrlState, 'card id:', id)
+    console.log("Dalle3 image from spread (DB):", dalle3ImageUrl, 'card id:', id)
 
     const diceTypes = ['d2', 'd4', 'd6', 'd8', 'd10_100', 'd12', 'd20'];
 
@@ -56,16 +55,18 @@ const DiceSpreadCard = ({ spread }) => {
             )}
 
             {/* // ! Dalle3 Image - Section */}
-            {dalle3ImageUrlState && (
+            {
                 <div className='dalle3Section'>
                     <img
+                        key={dalle3ImageUrlState}
                         className='dalle3Img'
                         src={dalle3ImageUrlState}
                         alt='Dalle3 Image'
                         onLoad={handleImageLoad}
                         style={imageLoading ? { display: 'none' } : {}}
-                    />                </div>
-            )}
+                    />
+                </div>
+            }
 
             {/* // ! Overview - Section */}
             <div className='overviewSection'>
