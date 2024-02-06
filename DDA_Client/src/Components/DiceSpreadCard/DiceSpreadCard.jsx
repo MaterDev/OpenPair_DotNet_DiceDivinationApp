@@ -46,9 +46,9 @@ const DiceSpreadCard = ({ spread }) => {
                     <hr />
                     <div className='lunarDataSection'>
                         <span className='lundarPhaseTxt'>{diceLunarData.phase}</span>
-                        <span className='lundarPhaseEmoji'>{diceLunarData.moon_phase_emoji} - </span>
+                        <span className='lundarPhaseEmoji'> {diceLunarData.moon_phase_emoji} - </span>
                         <span className='lundarZodiacTxt'>{diceLunarData.zodiac}</span>
-                        <span className='lundarZodiacEmoji'>{diceLunarData.zodiac_emoji}</span>
+                        <span className='lundarZodiacEmoji'> {diceLunarData.zodiac_emoji}</span>
                     </div>
                     <hr />
                 </>
