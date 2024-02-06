@@ -60,7 +60,7 @@ const DiceSpreadCard = ({ spread }) => {
                     <img
                         key={dalle3ImageUrlState}
                         className='dalle3Img'
-                        src={dalle3ImageUrlState}
+                        src={`/fs/rolledImages/` + dalle3ImageUrlState}
                         alt='Dalle3 Image'
                         onLoad={handleImageLoad}
                         style={imageLoading ? { display: 'none' } : {}}

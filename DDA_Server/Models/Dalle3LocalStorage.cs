@@ -11,7 +11,7 @@ public async Task<string?> DownloadAndSaveImage(ImageResult imageResult, string 
         HttpClient httpClient = new HttpClient();
         byte[] imageBytes = await httpClient.GetByteArrayAsync(imageResult.ToString());
 
-        string imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "../DDA_Client/public/storage/images/diceSpreadRolledImages");
+        string imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "../DDA_Client_FileServer/storage/images/diceSpreadRolledImages");
         Directory.CreateDirectory(imagesDirectory);
 
         string uniqueHash = Guid.NewGuid().ToString("N");
@@ -19,8 +19,8 @@ public async Task<string?> DownloadAndSaveImage(ImageResult imageResult, string 
 
         await File.WriteAllBytesAsync(imagePath, imageBytes);
 
-        string relativeUrl = $"/storage/images/diceSpreadRolledImages/{uniqueHash}_{diceSpreadId}.jpg";
-        return relativeUrl;
+        string fileName = $"{uniqueHash}_{diceSpreadId}.jpg";
+        return fileName;
     }
     catch (Exception ex)
     {

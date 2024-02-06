@@ -9,6 +9,7 @@ export default defineConfig(() => {
         server: {
             proxy: {
                 '/api':'http://localhost:5036',
+                '/fs/rolledImages': 'http://localhost:3000'
             }
         },
         plugins: [react()],
