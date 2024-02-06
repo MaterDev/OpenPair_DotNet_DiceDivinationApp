@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getAllDiceSpreads } from "../_utils/get.requests.js";
+import { getAllDiceSpreads } from "../../_utils/get.requests.js";
 
 const RollImageButton = ({ id, setDalle3ImageUrlState }) => {
   const [isLoading, setIsLoading] = useState(false);

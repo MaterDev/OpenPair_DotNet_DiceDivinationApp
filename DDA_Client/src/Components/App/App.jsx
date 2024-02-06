@@ -1,5 +1,5 @@
 
-import DiceReadings from "./DiceReadings/DiceReadings";
+import DiceReadings from "../DiceReadings/DiceReadings";
 
 function App() {
   const createSpread = (event) => {

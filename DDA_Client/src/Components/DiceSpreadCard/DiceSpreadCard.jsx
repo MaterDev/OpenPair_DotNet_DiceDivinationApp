@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { formatTime } from '../_utils/';
+import { formatTime } from '../../_utils';
 import RollImageButton from '../RollImageButton/RollImageButton';
 import { useState } from 'react';
 

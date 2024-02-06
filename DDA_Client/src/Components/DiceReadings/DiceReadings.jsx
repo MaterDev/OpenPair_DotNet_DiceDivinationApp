@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import DiceSpreadCard from "../DiceSpreadCard/DiceSpreadCard";
+import DiceSpreadCard from "../DiceSpreadCard/DiceSpreadCard.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllDiceSpreads } from "../_utils/get.requests.js";
+import { getAllDiceSpreads } from "../../_utils/";
 
 const DiceReadings = () => {
   const allSpreadCards = useSelector((state) => state.allSpreadCardsReducer);

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import allSpreadCardsReducer from './reducers/allSpreadCardsReducer'
+import allSpreadCardsReducer from './allSpreadCardsReducer'
 
 const rootReducer = combineReducers({
     allSpreadCardsReducer: allSpreadCardsReducer,
