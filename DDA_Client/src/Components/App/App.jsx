@@ -1,7 +1,12 @@
 
+
 import DiceReadings from "../DiceReadings/DiceReadings";
+import 'primereact/resources/primereact.min.css'; // Core styles
+import 'primereact/resources/themes/saga-blue/theme.css'; // Theme
+import 'primeflex/primeflex.css'
 
 function App() {
+
   const createSpread = (event) => {
     // Prevent form submission from refreshing the page
     event.preventDefault();
@@ -27,6 +32,7 @@ function App() {
         // Reload the page after the done audio has finished
         doneAudio.onended = function () {
           console.log("done");
+          // TODO: Avoiding Page Reloads in Single Page Applications (SPAs): 
           location.reload();
         };
       })
@@ -46,13 +52,12 @@ function App() {
         <span id="pleaseWait"></span>
         <button
           id="createSpreadBtn"
-          type="submit"
+          type="button"
           onClick={() => createSpread(event)}
         >
           🎲
         </button>
       </header>
-
       <DiceReadings />
     </>
   );

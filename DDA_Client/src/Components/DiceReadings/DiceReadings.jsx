@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import DiceSpreadCard from "../DiceSpreadCard/DiceSpreadCard.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllDiceSpreads } from "../../_utils/";
+import { getAllDiceSpreads, formatTime } from "../../_utils/";
 
 const DiceReadings = () => {
   const allSpreadCards = useSelector((state) => state.allSpreadCardsReducer);
@@ -18,9 +18,18 @@ const DiceReadings = () => {
   }, [dispatch])
 
   return (
-    <div className="allSpreads">
+    <div  id="diceReadings" className="grid">
       {allSpreadCards?.map((spread) => {
-        return <DiceSpreadCard key={spread.id} spread={spread} />;
+        return (
+          <div
+            key={spread.id}
+            className='col-12 md:col-6 lg:col-4 xl:col-3'
+            title={formatTime(spread.date)}
+            subTitle={`ID: ${spread.id}`}
+          >
+            <DiceSpreadCard key={spread.id} spread={spread} />
+          </div>
+        );
       })}
     </div>
   )

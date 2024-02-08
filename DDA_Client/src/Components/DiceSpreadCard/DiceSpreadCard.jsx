@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { formatTime } from '../../_utils';
 import RollImageButton from '../RollImageButton/RollImageButton';
 import { useState } from 'react';
 
@@ -24,14 +23,8 @@ const DiceSpreadCard = ({ spread }) => {
     let diceInterpretations = JSON.parse(interpretation)
 
     return (
-        <div className='diceSpreadCard' id={`spreadCard-id-${id}`}>
-
-            {/* // ! Header - Section */}
-            <div className='spreadCardHeader'>
-                <h2 className='diceSpreadCardTime'>{formatTime(spread.date)}</h2>
-                <h3 className='diceSpreadCardID'>ID: {id}</h3>
-            </div>
-
+        <>
+            
             {/* // ! Options - Section */}
             <div className='spreadCardOptions'>
                 <RollImageButton
@@ -56,16 +49,16 @@ const DiceSpreadCard = ({ spread }) => {
 
             {/* // ! Dalle3 Image - Section */}
             {
-                <div className='dalle3Section'>
-                    <img
-                        key={dalle3ImageUrlState}
-                        className='dalle3Img'
-                        src={`/fs/rolledImages/` + dalle3ImageUrlState}
-                        alt='Dalle3 Image'
-                        onLoad={handleImageLoad}
-                        style={imageLoading ? { display: 'none' } : {}}
-                    />
-                </div>
+                // <div className='dalle3Section'>
+                //     <img
+                //         key={dalle3ImageUrlState}
+                //         className='min-w-full'
+                //         src={`/fs/rolledImages/` + dalle3ImageUrlState}
+                //         alt='Dalle3 Image'
+                //         onLoad={handleImageLoad}
+                //         style={imageLoading ? { display: 'none' } : {}}
+                //     />
+                // </div>
             }
 
             {/* // ! Overview - Section */}
@@ -93,7 +86,7 @@ const DiceSpreadCard = ({ spread }) => {
                     ))}
                 </tbody>
             </table>
-        </div>
+        </>
     );
 }
 
