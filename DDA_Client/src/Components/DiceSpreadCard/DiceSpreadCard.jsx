@@ -29,8 +29,32 @@ const DiceSpreadCard = ({ spread }) => {
     backgroundColor: "var(--surface-200)",
   };
 
+  const header = (
+    <div style={{ position: "relative", overflow: "hidden", height: "300px" }}>
+      {dalle3ImageUrlState ? (
+        <Image
+          alt="Card"
+          src={`/fs/rolledImages/` + dalle3ImageUrlState}
+          style={{
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+          preview
+        />
+      ) : (
+        <div style={{ backgroundColor: 'var(--surface-400)', height: '100%', width: '100%' }}></div>
+        )}
+    </div>
+  );
+
   return (
-    <Card title={formatTime(date)} subTitle={`ID: ${id}`} style={cardStyle}>
+    <Card
+      title={formatTime(date)}
+      subTitle={`ID: ${id}`}
+      style={cardStyle}
+      header={header}
+    >
       {/* // ! Options - Section */}
       <CardOptions
         isRollingImage={isRollingImage}
@@ -59,29 +83,20 @@ const DiceSpreadCard = ({ spread }) => {
 
       {/* // ! Overview - Section */}
       <Panel className="overviewSection my-3" header="Overview">
+        {/* // ! Dice Interpretation Overview */}
         <p className="overviewText m-0">
           {diceInterpretations.overview_interpretation}
         </p>
       </Panel>
 
-      {/* // ! Dalle3 Image - Section */}
-      <Image
-        key={dalle3ImageUrlState}
-        imageClassName="dalle3Section my-3 w-full"
-        src={`/fs/rolledImages/` + dalle3ImageUrlState}
-        alt="Dalle3 Image"
-        onLoad={handleImageLoad}
-        style={imageLoading ? { display: "none" } : {}}
-        preview
-      />
-
-
-
       {/* // ! Spread Results - Section */}
-      <ResultTable diceTypes={diceTypes} spread={spread} diceInterpretations={diceInterpretations}/>
+      <ResultTable
+        diceTypes={diceTypes}
+        spread={spread}
+        diceInterpretations={diceInterpretations}
+      />
     </Card>
   );
-
 };
 
 DiceSpreadCard.propTypes = {
