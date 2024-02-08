@@ -13,7 +13,7 @@ export function formatTime(timestamp) {
     // Format first to get the date and time, without time
     let formattedDate = date.toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric"
     });
 

@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import axios from "axios";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllDiceSpreads } from "../../_utils/get.requests.js";
+import { Button } from "primereact/button";
 
-const RollImageButton = ({ id, setDalle3ImageUrlState }) => {
-  const [isLoading, setIsLoading] = useState(false);
+const RollImageButton = ({ id, setDalle3ImageUrlState, setIsRollingImage }) => {
+  
   const dispatch = useDispatch();
   
   const createDalle3Image = async () => {
@@ -14,7 +14,7 @@ const RollImageButton = ({ id, setDalle3ImageUrlState }) => {
       return;
     }
 
-    setIsLoading(true);
+    setIsRollingImage(true);
     //! API request to create the image
     axios
       .post(`/api/createDalle3/${id}`)
@@ -44,26 +44,26 @@ const RollImageButton = ({ id, setDalle3ImageUrlState }) => {
         console.error("Error createDalleUImage:", error);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsRollingImage(false);
       });
   };
 
   return (
-    <button
-      className="spreadImageBtn"
+    <Button
+      className="p-button-text p-button-plain menuItemButton"
       id={`spreadImageBtn-${id}`}
       data-cardid={id}
       onClick={createDalle3Image}
-      disabled={isLoading}
-    >
-      {isLoading ? "Rendering..." : "Roll Image"}
-    </button>
+      icon="pi pi-fw pi-palette"
+      label='Roll Image'
+    />
   );
 };
 
 RollImageButton.propTypes = {
   id: PropTypes.number.isRequired,
   setDalle3ImageUrlState: PropTypes.func.isRequired,
+  setIsRollingImage: PropTypes.func.isRequired,
 }
 
 export default RollImageButton;
