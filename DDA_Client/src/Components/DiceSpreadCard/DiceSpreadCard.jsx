@@ -6,6 +6,7 @@ import { Image } from "primereact/image";
 
 import { useState } from "react";
 import CardOptions from "./CardOptions";
+import ResultTable from "./ResultTable";
 
 const DiceSpreadCard = ({ spread }) => {
   const { id, lunarData, dalle3ImageUrl, interpretation, date } = spread;
@@ -77,26 +78,10 @@ const DiceSpreadCard = ({ spread }) => {
 
 
       {/* // ! Spread Results - Section */}
-      <table className="spreadResultTable my-3">
-        <thead>
-          <tr>
-            <th>Dice</th>
-            <th>Result</th>
-            <th>Interpretation</th>
-          </tr>
-        </thead>
-        <tbody>
-          {diceTypes.map((dice) => (
-            <tr key={dice}>
-              <th>{dice.toUpperCase()}</th>
-              <td>{spread[dice]}</td>
-              <td>{diceInterpretations.dice_interpretations[dice]}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ResultTable diceTypes={diceTypes} spread={spread} diceInterpretations={diceInterpretations}/>
     </Card>
   );
+
 };
 
 DiceSpreadCard.propTypes = {

@@ -2,7 +2,7 @@
 
 import DiceReadings from "../DiceReadings/DiceReadings";
 import 'primereact/resources/primereact.min.css'; // Core styles
-import 'primereact/resources/themes/saga-blue/theme.css'; // Theme
+import 'primereact/resources/themes/lara-light-blue/theme.css'; // Theme
 import 'primeflex/primeflex.css'
 import 'primeicons/primeicons.css';
 
