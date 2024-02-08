@@ -21,8 +21,8 @@ const DiceReadings = () => {
 
   return (
     <ResponsiveMasonry
-      columnsCountBreakPoints={{ 350: 1, 750: 2, 1500: 3 }}
-      className="m-8"
+      columnsCountBreakPoints={{ 700: 1, 1000: 2, 1500: 3 }}
+      className="m-3"
     >
       <Masonry gutter="25px">
       {allSpreadCards?.map((spread) => {
