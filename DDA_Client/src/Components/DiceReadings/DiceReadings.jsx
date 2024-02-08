@@ -23,7 +23,7 @@ const DiceReadings = () => {
         return (
           <div
             key={spread.id}
-            className='col-12 md:col-6 xl:col-4 p-4'
+            className='sm:col-12 md:col-12 lg:col-6 xl:col-4 p-4'
             
           >
             <DiceSpreadCard key={spread.id} spread={spread} />

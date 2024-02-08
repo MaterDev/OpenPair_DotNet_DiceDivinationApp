@@ -22,7 +22,7 @@ const DiceSpreadCard = ({ spread }) => {
         backgroundColor: "var(--surface-200)",
     };
 
-    const header = (
+    const graphicHeader = (
         <div style={{ position: "relative", overflow: "hidden", height: "300px" }}>
             {dalle3ImageUrlState ? (
                 <Image
@@ -46,7 +46,7 @@ const DiceSpreadCard = ({ spread }) => {
             title={formatTime(date)}
             subTitle={`ID: ${id}`}
             style={cardStyle}
-            header={header}
+            header={graphicHeader}
         >
             {/* // ! Options - Section */}
             <CardOptions
