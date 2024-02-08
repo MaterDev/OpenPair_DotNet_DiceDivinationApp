@@ -12,12 +12,7 @@ const DiceSpreadCard = ({ spread }) => {
   const { id, lunarData, dalle3ImageUrl, interpretation, date } = spread;
   const [dalle3ImageUrlState, setDalle3ImageUrlState] =
     useState(dalle3ImageUrl);
-  const [imageLoading, setImageLoading] = useState(true);
   const [isRollingImage, setIsRollingImage] = useState(false);
-
-  const handleImageLoad = () => {
-    setImageLoading(false);
-  };
 
   const diceTypes = ["d2", "d4", "d6", "d8", "d10_100", "d12", "d20"];
 
