@@ -401,3 +401,4 @@ FodyWeavers.xsd
 
 # Application storage in wwwroot folder
 DDA_Server/wwwroot/storage
+DDA_Client_FileServer/storage/images/diceSpreadRolledImages
