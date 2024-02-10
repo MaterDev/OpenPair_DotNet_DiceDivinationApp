@@ -75,7 +75,7 @@ const DiceSpreadCard = ({ spread }) => {
             )}
 
             {/* // ! Overview - Section */}
-            <Fieldset className="overviewSection my-3" legend="Overview">
+            <Fieldset className="overviewSection my-3" legend="Overview" toggleable collapsed>
                 {/* // ! Dice Interpretation Overview */}
                 <p className="overviewText m-0">
                     {diceInterpretations.overview_interpretation}

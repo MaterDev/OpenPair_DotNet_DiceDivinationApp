@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getAllDiceSpreads } from "../../_utils/get.requests.js";
 import { Button } from "primereact/button";
 
-const RollImageButton = ({ id, setDalle3ImageUrlState, setIsRollingImage }) => {
+const RollImageButton = ({ disabled, id, setDalle3ImageUrlState, setIsRollingImage }) => {
   
   const dispatch = useDispatch();
   
@@ -20,10 +20,6 @@ const RollImageButton = ({ id, setDalle3ImageUrlState, setIsRollingImage }) => {
       .post(`/api/createDalle3/${id}`)
       .then((response) => {
         console.log("Response from createDalle3Image:", response.data.imageUrl);
-        // Example reesponse: 
-        // {
-        //   "imageUrl": "/storage/images/diceSpreadRolledImages/f4297d06a19d41c1b32f14451b432547_18.jpg"
-        // }
         const randomNumber = Math.floor(Math.random() * 1000);
         setDalle3ImageUrlState(`${response.data.imageUrl}?v=${randomNumber}`);
       })
@@ -50,12 +46,13 @@ const RollImageButton = ({ id, setDalle3ImageUrlState, setIsRollingImage }) => {
 
   return (
     <Button
-      className="p-button-text p-button-plain menuItemButton"
+      className="p-button-text p-button-plain menuItemButton border-bluegray-200 bg-bluegray-100"
       id={`spreadImageBtn-${id}`}
       data-cardid={id}
       onClick={createDalle3Image}
-      icon="pi pi-fw pi-palette"
+      icon="pi pi-fw pi-image"
       label='Roll Image'
+      disabled={disabled}
     />
   );
 };
