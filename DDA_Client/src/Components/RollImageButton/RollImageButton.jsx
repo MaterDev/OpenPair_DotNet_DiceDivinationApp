@@ -53,6 +53,8 @@ const RollImageButton = ({ disabled, id, setDalle3ImageUrlState, setIsRollingIma
       icon="pi pi-fw pi-image"
       label='Roll Image'
       disabled={disabled}
+      size="small"
+      raised
     />
   );
 };

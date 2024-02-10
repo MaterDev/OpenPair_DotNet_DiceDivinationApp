@@ -22,34 +22,37 @@ const CardOptions = ({
     return conditions.some((condition) => condition);
   }, [isRollingImage]);
   
-  const startContent = (
+  const endContent = (
     <>
-       <Button
-      className="p-button-text p-button-plain menuItemButton border-bluegray-200 bg-bluegray-100"
-      icon="pi pi-fw pi-cog"
-      label='Options'
-    />
-    </>
-  );
-
-  const centerContent = (
-    <>
-       <Button
+    <span className="p-buttonset">
+    <Button
       className="p-button-text p-button-plain menuItemButton border-bluegray-200 bg-bluegray-100"
       icon="pi pi-fw pi-pencil"
       label='Workshop'
+      size="small"
+      raised
     />
-    </>
-  );
-  
-  const endContent = (
-    <>
-      <RollImageButton
+    <RollImageButton
             disabled={calculateGeenrateButtonDisabled}
             id={spreadId}
             setDalle3ImageUrlState={setDalle3ImageUrlState}
             setIsRollingImage={setIsRollingImage}
           />
+    </span>
+    </>
+  );
+
+ 
+  
+  const startContent = (
+    <>
+      <Button
+      icon="pi pi-fw pi-cog"
+      size="small"
+      severity="secondary"
+      rounded
+      raised
+    />
     </>
   );
 
@@ -58,7 +61,6 @@ const CardOptions = ({
   return (
     <Toolbar
       start={startContent}
-      center={centerContent}
       end={endContent}
       className="spreadCardOptions my-3"
       severity="secondary"
