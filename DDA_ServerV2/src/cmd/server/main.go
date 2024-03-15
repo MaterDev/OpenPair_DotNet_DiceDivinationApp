@@ -3,21 +3,20 @@ package main
 import (
     "fmt"
     "net/http"
+	"CoreServerV2/src/api/handlers"
 )
 
-// helloHandler responds to HTTP requests with a greeting.
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-    // For simplicity, we're ignoring the error that Write can return here.
-    fmt.Fprintf(w, "Hello, you've requested: %s\n", r.URL.Path)
-}
-
 func main() {
+    mux := http.NewServeMux()
+
     // Register the helloHandler with the http.DefaultServeMux.
-    http.HandleFunc("/", helloHandler)
+    mux.Handle("/api/", http.StripPrefix("/api", handlers.ApiHandler()))
+	// Register the helloHandler with the http.DefaultServeMux.
+    mux.Handle("/healthcheck/", http.StripPrefix("/healthcheck", handlers.HealthcCheckHandler()))
 
     // Start the server on port 8080.
     fmt.Println("Server is listening on port 8080...")
-    if err := http.ListenAndServe(":8080", nil); err != nil {
+    if err := http.ListenAndServe(":8080", mux); err != nil {
         fmt.Printf("Error starting server: %s\n", err)
         return
     }

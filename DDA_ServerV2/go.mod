@@ -1,3 +1,3 @@
-module DDA/CoreServer
+module CoreServerV2
 
 go 1.21.4
